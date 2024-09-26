@@ -1,0 +1,48 @@
+<div class="modal" id="modalNewClient"
+     _="on click if event.target.closest('.modal-content') is null then transition opacity to 0 over 300ms then remove me">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span>Добавление нового проекта</span>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" aria-labelledby="close button"
+                    _="on click transition .modal's opacity to 0 over 300ms then del .show from #modalNewClient"><i
+                    class="fa-solid fa-xmark fa-xl"></i></button>
+        </div>
+
+        <form class="modal-content" id="formNewProject" method="post">
+            <div class="modal-body">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="ProjectName" name="projectName"
+                           placeholder="Название проекта" required="">
+                </div>
+                <div class="form-floating">
+                    <div class="eye"><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></div>
+                    <input type="text" class="form-control" id="ProjectPassword" name="projectPassword"
+                           placeholder="Пароль" required="">
+                </div>
+                <div class="projectDate form-floating">
+                    <i class="fa-regular fa-calendar-days fa-xl" aria-hidden="true"></i>
+                    <input type="text" name="projectDate" id="projectDate" placeholder="Дата съемки"
+                           class="datepicker-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="custom-btn reject-btn" aria-labelledby="reject"
+                        _="on click transition .modal's opacity to 0 over 300ms then remove #modalNewClient">Отмена
+                </button>
+                <button type="submit" class="custom-btn submit-btn" hx-post="/adminka/?action=addNew" hx-target="this"
+                        hx-swap="innerHTML" aria-labelledby="submit">Создать
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <script>
+        const elem = document.querySelector('input[name="projectDate"]')
+        const datepicker = new Datepicker(elem, {})
+
+        elem.addEventListener('changeDate', function () {
+            datepicker.hide();
+        })
+    </script>

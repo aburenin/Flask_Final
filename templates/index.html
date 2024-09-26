@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Baby- und Neugeborenen-Fotografie in Singen | B. Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+
+
+</head>
+<body>
+
+{% set images = ['Zuwachs.avif', 'Babyhaende.avif', 'Neugeborene.avif', 'Saeugling.avif', 'Maedchen.avif'] %}
+
+<header>
+    {% include 'hilfsportal/mobile_header.html' %}
+
+    <div class="logo desktop" _="on click go to url /"></div>
+
+
+    <div class="index">
+        {% include 'hilfsportal/navbar.html' %}
+    </div>
+</header>
+
+<section id="carouselMobile">
+    <div class="slider">
+        <div class="mouse desktop" _="on click go to the .head-faq -16px smoothly"></div>
+        <img class="slider-img active"
+             data-srcset="{{ url_for('static', filename='media/avif/small_w500/' + 'Zuwachs.avif') }} 350w,
+                              {{ url_for('static', filename='media/avif/small/' + 'Zuwachs.avif') }} 1000w,
+                              {{ url_for('static', filename='media/avif/' + 'Zuwachs.avif') }} 1900w"
+             sizes="70vw"
+             src="/static/media/avif/blur/Zuwachs.avif"
+             style="opacity: 1"
+             alt="Zuwachs" loading="eager">
+        {#            _="on intersection(intersecting) having threshold 0.5 if intersecting put @data-srcset into me.srcset">#}
+        {% for image in images[1::] %}
+            <img class="slider-img"
+                 data-srcset="{{ url_for('static', filename='media/avif/small_w500/' + image) }} 350w,
+                              {{ url_for('static', filename='media/avif/small/' + image) }} 1000w,
+                              {{ url_for('static', filename='media/avif/' + image) }} 1900w"
+                 sizes="70vw"
+                 src="{{ url_for('static', filename='media/avif/blur/' + image) }}"
+                 alt="Zuwachs" loading="eager">
+            {#            _="on intersection(intersecting) having threshold 0.5 if intersecting put @data-srcset into me.srcset">#}
+        {% endfor %}
+    </div>
+
+    <button class="slider-control prev" type="button" data-bs-target="#carouselExampleFadeMobile"
+            data-bs-slide="prev"
+            aria-label="Preview page" aria-labelledby="Preview page">
+        {#        <i class="fa-solid fa-chevron-left fa-2xl" style="color: #ffffff;" aria-hidden="true"></i>#}
+    </button>
+
+    <button class="slider-control next" type="button" data-bs-target="#carouselExampleFadeMobile"
+            data-bs-slide="next"
+            aria-label="Next page" aria-labelledby="Next page">
+        {#        <i class="fa-solid fa-chevron-right fa-2xl" style="color: #ffffff;" aria-hidden="true"></i>#}
+    </button>
+</section>
+
+
+<section class="questions" id="FAQ">
+
+    <h1 class="head-faq">Neugeborene, Babybauch und Baby Fotografie</h1>
+
+
+    <ul class="list-unstyled">
+        {% include 'hilfsportal/FAQ.html' %}
+    </ul>
+</section>
+
+<script type="module" src="{{ url_for('static', filename='js/carousel.js' ) }}" defer></script>
+
+
+{% include 'hilfsportal/footer.html' %}
+
+
+
+
+</body>
+</html>
+

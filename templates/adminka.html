@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Admin panel Burenina Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+
+    <link href="{{ url_for('static', filename='css/adminka.css') }}" rel="stylesheet">
+    {#    <link href="{{ url_for('static', filename='css/modal_admin.css') }}" rel="stylesheet">#}
+{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">#}
+    <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/datepicker.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body>
+<section class="projects" id="projects">
+
+    <h1>Админ панель управления проектами.</h1>
+    <a class="logout-admin" href="/logout/"><i class="fa-solid fa-power-off fa-lg"></i></a>
+
+    <div class="add-new-projekt">
+        <button class="add-project" aria-labelledby="add new project">Добавить новый проект
+        </button>
+        <p class="desktop">Нажимай и добавляй новый проект почти как в Wfolio :)</p>
+    </div>
+
+    <section class="table-projects" id="tableProjects">
+        <div class="table-header">
+            <div class="kunden-info">Название проекта</div>
+            <div class="fotos-list">Выбранные фотографии</div>
+            <div class="shooting-date desktop">Дата съемки</div>
+            <div class="kunden-options">Настройки</div>
+        </div>
+
+        <div class="table-body">
+        </div>
+
+        <div class="table-footer">
+            <button id="LoadMoreProjects" class="">Следующие 10 проектов</button>
+        </div>
+    </section>
+</section>
+
+<div class="modal" id="modalNewClient"></div>
+<div class="modal" id="modalChangePassw"></div>
+
+<div class="modal" id="modalSuccess"></div>
+
+
+{#<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>#}
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.12/dist/htmx.min.js"></script>
+<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+
+
+<script type="module" src="/static/js/extern/datepicker.js" defer></script>
+<script type="module" src="/static/js/adminka.js" defer></script>
+
+<script src="https://kit.fontawesome.com/4fa870037a.js" crossorigin="anonymous" async></script>
+
+</body>
+
+</html>

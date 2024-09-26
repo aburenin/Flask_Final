@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Preise und Pakete Fotoshooting Burenina Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+    <link href="{{ url_for('static', filename='css/preise.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<header>
+
+    {% include 'hilfsportal/mobile_header.html' %}
+
+    <div class="logo header-logo desktop" _="on click go to url /" ></div>
+
+    {% include 'hilfsportal/navbar.html' %}
+    <hr class="desktop">
+</header>
+
+<p class="intro">Ein Babyshooting ist eine wundervolle Möglichkeit, die ersten Augenblicke und die einmalige Unschuld
+    eines
+    Neugeborenen festzuhalten.</p>
+
+<section class="price-table"></section>
+
+{% include 'hilfsportal/footer.html' %}
+<script type="module" src="{{ url_for('static', filename='js/prise.js' ) }}" defer></script>
+
+</body>
+</html>
+

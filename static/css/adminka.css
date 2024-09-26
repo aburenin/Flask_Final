@@ -1,0 +1,192 @@
+body {
+    /*background: #666;*/
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--adminka-body-color);
+    color: rgba(255, 255, 255, 0.71);
+}
+
+html, body {
+    -webkit-user-select: none; /* Для Safari */
+    -moz-user-select: none; /* Для Firefox */
+    -ms-user-select: none; /* Для Internet Explorer и Edge */
+    user-select: none; /* Стандартный синтаксис */
+}
+
+#projects {
+    width: 90%;
+    margin: auto;
+
+    h1 {
+        font-size: 23px;
+        text-align: center;
+        margin: 2rem 0 0 2rem;
+        letter-spacing: 2px;
+        text-shadow: 0px 0px 5px wheat;
+    }
+
+    .logout-admin {
+        position: absolute;
+        top: 2rem;
+        right: 1rem;
+        height: 30px;
+        padding: 0 1rem;
+        background: rgba(245, 174, 174, 0.75);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+
+        &:hover {
+            transform: scale(1.05);
+            color: #f7f4f0;
+            background-color: #3c3c3c;
+        }
+    }
+
+    .add-new-projekt {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem auto;
+        align-items: center;
+
+        button {
+            height: 50px;
+            flex: 2;
+            max-width: 400px;
+            border-radius: 10px;
+            background-color: #c5c5c5;
+            font-size: 16px;
+            cursor: pointer;
+            margin: auto;
+
+            &:hover {
+                background-color: rgba(98, 98, 98, 0.5);
+                color: #f7f4f0;
+            }
+        }
+
+        p {
+            flex: 4;
+            text-align: center;
+        }
+    }
+}
+
+#tableProjects {
+    font-size: clamp(0.75rem, 0.5rem + 1.14vw, 1rem);
+
+    .table-header {
+        display: flex;
+        text-align: center;
+        border-bottom: 2px solid #c5c5c5;
+        padding: .5rem;
+    }
+
+    .table-body {
+        .kunden-table {
+            display: flex;
+            align-items: center;
+            padding: .5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 197, 197, 0.2);
+        }
+    }
+
+    .kunden-info {
+        text-align: left;
+        flex: 2;
+        display: flex;
+        gap: 1rem;
+        cursor: pointer;
+
+        /*img {*/
+        /*    max-width: 100px;*/
+        /*    height: fit-content;*/
+        /*    !*margin: auto;*!*/
+        /*}*/
+
+        .projects-table__item-cover {
+            height: 75px;
+            width: 75px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 8px;
+        }
+
+        .client {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-size: 18px;
+
+            .client-name {
+                font-size: clamp(14px, 2vw, 18px);
+            }
+
+            .path-size {
+                font-size: 12px;
+            }
+        }
+    }
+
+    .fotos-list {
+        flex: 5;
+        max-height: 6em;
+        overflow-y: hidden;
+        text-wrap: balance;
+        cursor: pointer;
+
+        &.more {
+            max-height: fit-content;
+        }
+    }
+
+    .shooting-date {
+        flex: 1;
+    }
+
+    .kunden-options {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        /*gap: 1rem;*/
+
+        i {
+            height: 40px;
+            width: 40px;
+            align-content: center;
+            cursor: pointer;
+        }
+
+        .fa-trash-can:hover,
+        .fa-gear:hover {
+            background-color: wheat;
+            border-radius: 10px;
+        }
+
+        .fa-gear:hover {
+            color: #4b4b4b !important;
+        }
+
+    }
+
+    .table-footer {
+        margin: 1rem auto;
+        text-align: center;
+
+        button {
+            height: 30px;
+            border-radius: 5px;
+            background-color: #c5c5c5;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(98, 98, 98, 0.5);
+                color: #f7f4f0;
+            }
+
+        }
+    }
+}
+
