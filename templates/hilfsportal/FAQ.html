@@ -1,0 +1,21 @@
+{% for question in questions %}
+    <li>
+        <h2 class="question" id="question_{{ question.id }}" _="on click
+        if I do not match .bold
+            remove .bold from .question remove .show from .answer
+            add .bold to me add .show to next .answer
+        else
+            remove .bold from .question remove .show from .answer">
+            {{ question.question }}
+        </h2>
+        <p class="answer" id="answer_{{ question.id }}">
+            {{ question.answer }}
+        </p>
+    </li>
+{% endfor %}
+
+<script>
+    document.addEventListener('load', ()=>{
+        _hyperscript.processNode(document.getElementById('FAQ'))
+    })
+</script>

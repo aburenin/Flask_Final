@@ -1,0 +1,38 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /plugins/
+Disallow: /search/
+Disallow: /cart/
+Disallow: */clients/*
+Disallow: */?s=
+Disallow: *sort=
+Disallow: *view=
+Disallow: *utm=
+
+User-agent: GoogleBot
+Disallow: /admin/
+Disallow: /plugins/
+Disallow: /search/
+Disallow: /cart/
+Disallow: */clients/*
+Disallow: */?s=
+Disallow: *sort=
+Disallow: *view=
+Disallow: *utm=
+
+
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /plugins/
+Disallow: /search/
+Disallow: /cart/
+Disallow: */clients/*
+Disallow: */?s=
+Disallow: *sort=
+Disallow: *view=
+Disallow: *utm=
+
+
+Sitemap: https://fotosbaby.de/page-sitemap.xml
+
+Host: https://fotosbaby.de/

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Preise und Pakete Fotoshooting Burenina Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+    <link href="{{ url_for('static', filename='css/portfolio.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='libs/PhotoSwipe/photoswipe.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+<header>
+
+    {% include 'hilfsportal/mobile_header.html' %}
+
+    <div class="logo header-logo desktop" _="on click go to url /" ></div>
+
+    {% include 'hilfsportal/navbar.html' %}
+    <hr class="desktop">
+</header>
+
+<section class="grid masonry" id="portfolio_gallery">
+    <div class="grid-sizer">
+    </div>
+
+    {{ gallery|safe }}
+
+</section>
+
+<button class="up-to-top" aria-labelledby="" aria-label="" _="on click go to the top of the body smoothly">
+</button>
+
+{% include 'hilfsportal/footer.html' %}
+
+
+<script src="{{ url_for('static', filename='libs/Isotope/isotope.pkgd.min.js' ) }}" async></script>
+<script type="module" src="{{ url_for('static', filename='js/portfolio.js' ) }}" async></script>
+
+</body>
+</html>
+

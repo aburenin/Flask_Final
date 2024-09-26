@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Kontakt form mit Burenina Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+    <link href="{{ url_for('static', filename='css/kontakt.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+<header>
+
+    {% include 'hilfsportal/mobile_header.html' %}
+
+    <div class="logo header-logo desktop" _="on click go to url /" ></div>
+
+    {% include 'hilfsportal/navbar.html' %}
+    <hr class="desktop">
+</header>
+<main class="kontakt">
+    <form class="contact-form" id="contactForm" method="POST">
+        <div class="name">
+            <div class="first-name">
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Max" value=""
+                       required>
+            </div>
+
+            <div class="second-name">
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Mustermann"
+                       value="" required>
+            </div>
+        </div>
+
+        <div class="contact">
+            <div class="phone-number">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="+4912345678910"
+                       pattern="[0-9()+ ]*">
+            </div>
+
+            <div class="email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+        </div>
+
+        <div class="fotoshoot-art">
+            <select class="form-select" id="inputGroupSelect01" name="inputGroupSelect01">
+                <option selected="">Auswahl...</option>
+                <option value="Newborn">Newborn</option>
+                <option value="Babybauch">Babybauch</option>
+                <option value="Baby (5-24 Monate)">Baby (5-24 Monate)</option>
+            </select>
+        </div>
+
+        <div class="message">
+            <textarea class="form-control" id="message" name="message" placeholder="Your message here"></textarea>
+        </div>
+
+        <div class="form-check">
+            <label>
+                <input class="real-checkbox" type="checkbox" name="checkbox" id="stimmung">
+                <span class="custom-checkbox"></span>
+                ICH STIMME ZU, DASS MEINE ANGABEN AUS DEM KONTAKTFORMULAR ZUR BEANTWORTUNG MEINER ANFRAGE ERHOBEN UND
+                VERARBEITET WERDEN. Hinweis: Die Daten werden nach abgeschlossener Bearbeitung deiner Anfrage
+                gelöscht. Du kannst deine Einwilligung jederzeit für die Zukunft per E-Mail an info @fotos-baby.de
+                widerrufen. Detaillierte Informationen zum Umgang mit Nutzerdaten findest du in meiner
+                Datenschutzerklärung.
+            </label>
+        </div>
+        <span id="error-msg" class="error" style="display: none;">Bitte akzeptieren Sie die Bedingungen.</span>
+
+        <button class="" type="submit" name="submitButton" disabled="" aria-labelledby="submit">E-mail
+            senden!
+        </button>
+    </form>
+    <div class="contact-info">
+        <h2>KONTAKT</h2>
+        <ul class="">
+            <li>Neugeborene, Babybauch &amp; Baby Fotografie
+            </li>
+            <li><a href="https://goo.gl/maps/AoooHaHJ5Ap1TnEBA">Cappanstraße 878224, Singen
+                (Hohentwiel)</a></li>
+            <li>
+                <a class="link phone" href="tel:+4915782025303">+(49)157-82025303</a>
+            </li>
+            <li>
+                <a class="link phone" href="tel:+4915771918292">+(49)157-71918292</a>
+            </li>
+            <li>
+                <a class="link e-mail" href="mailto:info@fotos-baby.de">info@fotos-baby.de</a>
+            </li>
+        </ul>
+    </div>
+</main>
+
+{% include 'hilfsportal/footer.html' %}
+
+<script src="https://smtpjs.com/v3/smtp.js" defer></script>
+
+<script type="module" src="{{ url_for('static', filename='js/kontakt.js' ) }}" defer></script>
+
+</body>
+</html>
+

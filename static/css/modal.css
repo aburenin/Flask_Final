@@ -1,0 +1,435 @@
+/*************  Modal Impressum  ************/
+
+:root {
+    --whatsapp-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-label='WhatsApp' role='img' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='15%25' fill='%2325d366'/%3E%3Cpath fill='%2325d366' stroke='%23ffffff' stroke-width='26' d='M123 393l14-65a138 138 0 1150 47z'/%3E%3Cpath fill='%23ffffff' d='M308 273c-3-2-6-3-9 1l-12 16c-3 2-5 3-9 1-15-8-36-17-54-47-1-4 1-6 3-8l9-14c2-2 1-4 0-6l-12-29c-3-8-6-7-9-7h-8c-2 0-6 1-10 5-22 22-13 53 3 73 3 4 23 40 66 59 32 14 39 12 48 10 11-1 22-10 27-19 1-3 6-16 2-18'/%3E%3C/svg%3E") no-repeat center center;
+    --instagram-svg: url("data:image/svg+xml,%3Csvg width='800px' height='800px' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='2' y='2' width='28' height='28' rx='6' fill='url(%23paint0_radial_87_7153)'/%3E%3Crect x='2' y='2' width='28' height='28' rx='6' fill='url(%23paint1_radial_87_7153)'/%3E%3Crect x='2' y='2' width='28' height='28' rx='6' fill='url(%23paint2_radial_87_7153)'/%3E%3Cpath d='M23 10.5C23 11.3284 22.3284 12 21.5 12C20.6716 12 20 11.3284 20 10.5C20 9.67157 20.6716 9 21.5 9C22.3284 9 23 9.67157 23 10.5Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21ZM16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z' fill='white'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6 15.6C6 12.2397 6 10.5595 6.65396 9.27606C7.2292 8.14708 8.14708 7.2292 9.27606 6.65396C10.5595 6 12.2397 6 15.6 6H16.4C19.7603 6 21.4405 6 22.7239 6.65396C23.8529 7.2292 24.7708 8.14708 25.346 9.27606C26 10.5595 26 12.2397 26 15.6V16.4C26 19.7603 26 21.4405 25.346 22.7239C24.7708 23.8529 23.8529 24.7708 22.7239 25.346C21.4405 26 19.7603 26 16.4 26H15.6C12.2397 26 10.5595 26 9.27606 25.346C8.14708 24.7708 7.2292 23.8529 6.65396 22.7239C6 21.4405 6 19.7603 6 16.4V15.6ZM15.6 8H16.4C18.1132 8 19.2777 8.00156 20.1779 8.0751C21.0548 8.14674 21.5032 8.27659 21.816 8.43597C22.5686 8.81947 23.1805 9.43139 23.564 10.184C23.7234 10.4968 23.8533 10.9452 23.9249 11.8221C23.9984 12.7223 24 13.8868 24 15.6V16.4C24 18.1132 23.9984 19.2777 23.9249 20.1779C23.8533 21.0548 23.7234 21.5032 23.564 21.816C23.1805 22.5686 22.5686 23.1805 21.816 23.564C21.5032 23.7234 21.0548 23.8533 20.1779 23.9249C19.2777 23.9984 18.1132 24 16.4 24H15.6C13.8868 24 12.7223 23.9984 11.8221 23.9249C10.9452 23.8533 10.4968 23.7234 10.184 23.564C9.43139 23.1805 8.81947 22.5686 8.43597 21.816C8.27659 21.5032 8.14674 21.0548 8.0751 20.1779C8.00156 19.2777 8 18.1132 8 16.4V15.6C8 13.8868 8.00156 12.7223 8.0751 11.8221C8.14674 10.9452 8.27659 10.4968 8.43597 10.184C8.81947 9.43139 9.43139 8.81947 10.184 8.43597C10.4968 8.27659 10.9452 8.14674 11.8221 8.0751C12.7223 8.00156 13.8868 8 15.6 8Z' fill='white'/%3E%3Cdefs%3E%3CradialGradient id='paint0_radial_87_7153' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(12 23) rotate(-55.3758) scale(25.5196)'%3E%3Cstop stop-color='%23B13589'/%3E%3Cstop offset='0.79309' stop-color='%23C62F94'/%3E%3Cstop offset='1' stop-color='%238A3AC8'/%3E%3C/radialGradient%3E%3CradialGradient id='paint1_radial_87_7153' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(11 31) rotate(-65.1363) scale(22.5942)'%3E%3Cstop stop-color='%23E0E8B7'/%3E%3Cstop offset='0.444662' stop-color='%23FB8A2E'/%3E%3Cstop offset='0.71474' stop-color='%23E2425C'/%3E%3Cstop offset='1' stop-color='%23E2425C' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='paint2_radial_87_7153' cx='0' cy='0' r='1' gradientUnits='userSpaceOnUse' gradientTransform='translate(0.500002 3) rotate(-8.1301) scale(38.8909 8.31836)'%3E%3Cstop offset='0.156701' stop-color='%23406ADC'/%3E%3Cstop offset='0.467799' stop-color='%236A45BE'/%3E%3Cstop offset='1' stop-color='%236A45BE' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3C/svg%3E") no-repeat center center;
+    --telegram-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-label='Telegram' role='img' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='15%25' fill='%2337aee2'/%3E%3Cpath fill='%23c8daea' d='M199 404c-11 0-10-4-13-14l-32-105 245-144'/%3E%3Cpath fill='%23a9c9dd' d='M199 404c7 0 11-4 16-8l45-43-56-34'/%3E%3Cpath fill='%23f6fbfe' d='M204 319l135 99c14 9 26 4 30-14l55-258c5-22-9-32-24-25L79 245c-21 8-21 21-4 26l83 26 190-121c9-5 17-3 11 4'/%3E%3C/svg%3E") no-repeat center center;
+    --mail-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-label='Email' role='img' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='15%25' fill='teal'/%3E%3Crect width='356' height='256' x='78' y='128' fill='%23ffffff' rx='8%25'/%3E%3Cpath fill='none' stroke='teal' stroke-width='20' d='M434 128L269 292c-7 8-19 8-26 0L78 128m0 256l129-128m227 128L305 256'/%3E%3C/svg%3E") no-repeat center center;
+}
+
+.modal {
+    position: fixed;
+    opacity: 0;
+    top: -100%;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(54, 54, 54, 0.8);
+    transition: opacity 0.4s ease-in-out;
+
+    &.show {
+        top: 0;
+        opacity: 1;
+        display: flex;
+    }
+}
+
+
+.modal-dialog {
+    position: absolute;
+    z-index: 101;
+    width: 500px;
+    max-width: 90%;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    line-height: normal;
+}
+
+.modal-content {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+
+    img {
+        height: 6.25rem;
+        width: auto;
+        filter: drop-shadow(3px -2px 2px #626262);
+    }
+
+    .btn-close {
+        position: absolute;
+        padding: 10px;
+        top: 0.2em;
+        right: 0.2em;
+        border: none;
+        color: #363636;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            background: #959595;
+            border-radius: 50%;
+            color: aliceblue;
+        }
+    }
+}
+
+#impressum {
+    .modal-dialog {
+        max-height: 80svh;
+        overflow-y: scroll;
+        font-size: clamp(12px, 2vw, 16px);
+    }
+}
+
+
+/*************  Modal Impressum  ENDE  ************/
+
+
+/*************  Modal NEW Client  START  ************/
+#modalNewClient, #modalChangePassw {
+    color: #363636;
+    caret-color: #363636 !important;
+
+    .modal-dialog {
+        max-width: 350px;
+        width: 90%;
+    }
+
+    .modal-header {
+        margin: 2rem auto;
+
+        span {
+            font-size: clamp(0.75rem, 6.15vw, 1.25rem);
+            max-width: 80%;
+            text-wrap: pretty;
+            text-align: center;
+        }
+    }
+
+    .modal-body {
+        border-radius: 10px;
+        box-shadow: 0 0 10px grey;
+        gap: 1rem;
+        padding: 1rem;
+
+        .form-floating {
+            position: relative;
+            width: 100%;
+
+            input {
+                width: 100%;
+                height: 40px;
+                border-radius: 10px;
+                border: 0 transparent;
+                box-shadow: 0 0 10px grey;
+                padding-left: .5rem;
+            }
+
+            label {
+                position: absolute;
+            }
+
+            i {
+                position: absolute;
+                top: 50%;
+                right: 1rem;
+                transform: translateY(-50%);
+            }
+        }
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+
+        button {
+            border-radius: .5rem;
+            /*border: 2px solid #3c3c3c;*/
+            height: 30px;
+            width: 100px;
+            transition: .25s ease-in-out;
+            cursor: pointer;
+
+            &.reject-btn {
+                box-shadow: 0 0 10px red;
+            }
+
+            &.submit-btn {
+                box-shadow: 0 0 10px green;
+            }
+
+
+            &:hover {
+                background-color: #3c3c3c;
+                color: #f7f4f0;
+            }
+        }
+    }
+}
+
+/*************  Modal NEW Client  END  ************/
+
+/*************  Modal Contact Me  START  ************/
+
+#contactMe {
+
+    &.wrapper {
+        position: fixed;
+        top: -100%;
+        left: 0;
+        z-index: 2;
+        width: 100dvw;
+        height: 100dvh;
+        background: rgba(255, 255, 255, 0);
+        opacity: 0;
+        transition: opacity 0.4s ease-in-out;
+
+        &.show {
+            top: 0;
+            opacity: 1;
+        }
+    }
+
+    .messanger {
+        background-color: var(--messenger-color);
+        width: 330px;
+        position: absolute;
+        bottom: 1rem;
+        right: 0;
+        overflow: hidden;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: space-between;
+        cursor: pointer;
+
+
+        .message-bubble {
+            height: fit-content;
+            width: 300px;
+            background-color: var(--liner-grey);
+            position: relative;
+            top: .5rem;
+            left: 1rem;
+            border-radius: 20px;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 35px;
+                height: 25px;
+                background-color: var(--liner-grey);
+                bottom: 0;
+                left: -15px;
+                border-bottom-right-radius: 25px;
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                width: 15px;
+                height: 25px;
+                background-color: var(--messenger-color);
+                bottom: 0;
+                left: -15px;
+                border-bottom-right-radius: 25px;
+            }
+
+            p.sms {
+                padding: .5em .5em .5em 1.5em;
+                height: fit-content;
+                font-family: 'ABeeZee', 'Helvetica', 'Arial', 'sans-serif';
+                font-size: 14px;
+                color: black;
+                letter-spacing: 1.2px;
+                text-shadow: 0 0 3px wheat;
+            }
+        }
+
+        .soc-list {
+            margin: 0 0 .5rem 0;
+            list-style: none;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-btn {
+            width: 100%;
+            height: 50px;
+            text-decoration: none;
+            color: whitesmoke !important;
+            display: contents;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: content-box;
+            padding: .5rem 0;
+            cursor: pointer;
+            gap: 1rem;
+            transition: .15s ease-in-out;
+            font-size: calc(1rem + .3vw);
+            box-shadow: 0px 0px 5px #000000bf;
+
+            &:hover {
+                background: #294661;
+            }
+
+
+            &.WA:before {
+                content: '';
+                display: inline-block;
+                margin-left: 15%;
+                width: 40px; /* Установите желаемую ширину */
+                height: 40px; /* Установите желаемую высоту */
+                background: var(--whatsapp-svg);
+                background-size: contain;
+            }
+
+            &.TE:before {
+                content: '';
+                display: inline-block;
+                margin-left: 15%;
+                width: 40px; /* Установите желаемую ширину */
+                height: 40px; /* Установите желаемую высоту */
+                background: var(--telegram-svg);
+                background-size: contain;
+            }
+
+            &.INST:before {
+                content: '';
+                display: inline-block;
+                margin-left: 15%;
+                width: 40px; /* Установите желаемую ширину */
+                height: 40px; /* Установите желаемую высоту */
+                background: var(--instagram-svg);
+                background-size: contain;
+            }
+
+            &.MAIL:before {
+                content: '';
+                display: inline-block;
+                margin-left: 15%;
+                width: 40px; /* Установите желаемую ширину */
+                height: 40px; /* Установите желаемую высоту */
+                background: var(--mail-svg);
+                background-size: contain;
+            }
+        }
+    }
+}
+
+#success {
+    background-color: rgba(54, 54, 54, 0.95);
+
+    .modal-dialog {
+        background: transparent;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .modal-content {
+        max-width: 250px;
+        width: 80%;
+        margin: auto;
+    }
+
+    .modal-header {
+        text-align: center;
+
+        i {
+            font-size: 4rem;
+        }
+    }
+
+    .modal-body {
+        align-items: center;
+
+        p {
+            font-size: clamp(1rem, 1.58vw, 1.375rem);
+            text-align: center;
+            text-wrap: nowrap;
+        }
+    }
+
+
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+            width: 100%;
+            height: 45px;
+            border-radius: 5px;
+            background-color: transparent;
+            cursor: pointer !important;
+        }
+
+        .button-negative {
+            border: 2px solid #ea2e49;
+            color: #ea2e49;
+
+
+            &:hover {
+                border: 2px solid #ea2e49;
+                background-color: #ea2e49;
+                color: white;
+            }
+        }
+
+        .button-positive {
+            border: 2px solid #00a777;
+            color: #00a777;
+
+
+            &:hover {
+                border: 2px solid #00a777;
+                color: #00a777;
+                background: rgba(0, 167, 119, 0.1);
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+#modalChangePassw {
+    .modal-dialog {
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .modal-header {
+        margin: 1rem auto;
+    }
+
+    .form-floating {
+        display: flex;
+        justify-content: center;
+
+        input {
+            height: 40px;
+            width: 70%;
+            border: none;
+            box-shadow: 0 0 10px dimgrey;
+            border-radius: 10px;
+            padding: 5px 10px;
+            margin: 1rem 0;
+        }
+    }
+}
