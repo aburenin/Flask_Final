@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba5acc5-f8ce-4733-8148-94dc33126770" name="Changes" comment="first">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cba5acc5-f8ce-4733-8148-94dc33126770" name="Changes" comment="first" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,12 +97,12 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="338fb3fb-8758-49b6-b2f0-97c36cb7b420" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/aburenin/FlasK_Final.git",
-    "accountId": "338fb3fb-8758-49b6-b2f0-97c36cb7b420"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aburenin/FlasK_Final.git&quot;,
+    &quot;accountId&quot;: &quot;338fb3fb-8758-49b6-b2f0-97c36cb7b420&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -135,7 +132,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/BureninA.ONE-BCS/PycharmProjects/Flask_Final",
+    "last_opened_file_path": "C:/Users/BureninA.ONE-BCS/PycharmProjects/Flask_Final/instance/fotos-baby.db",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -169,7 +166,7 @@
       <recent name="C:\Users\BureninA.ONE-BCS\PycharmProjects\Flask_Final\static\fonts" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Flask_Final">
+  <component name="RunManager" selected="Flask server.Flask_Final">
     <configuration name="tests | GET request to example server" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/tests.http" requestIdentifier="GET request to example server" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -270,7 +267,24 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Flask_Final" type="Python.FlaskServer">
+      <module name="Flask_Final" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Flask server.Flask_Final" />
       <item itemvalue="HTTP Request.tests | GET request to example server" />
       <item itemvalue="HTTP Request.tests | #2" />
       <item itemvalue="HTTP Request.tests | #3" />
@@ -353,6 +367,7 @@
       <workItem from="1727339335057" duration="98000" />
       <workItem from="1727339485162" duration="2034000" />
       <workItem from="1727341587752" duration="2990000" />
+      <workItem from="1727350369623" duration="1261000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
