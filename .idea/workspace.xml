@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cba5acc5-f8ce-4733-8148-94dc33126770" name="Changes" comment="first" />
+    <list default="true" id="cba5acc5-f8ce-4733-8148-94dc33126770" name="Changes" comment="first">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,12 +100,12 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="338fb3fb-8758-49b6-b2f0-97c36cb7b420" />
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/aburenin/Finally_Flask.git&quot;,
-    &quot;accountId&quot;: &quot;338fb3fb-8758-49b6-b2f0-97c36cb7b420&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/aburenin/FlasK_Final.git",
+    "accountId": "338fb3fb-8758-49b6-b2f0-97c36cb7b420"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -349,7 +352,7 @@
       <workItem from="1727337574092" duration="1643000" />
       <workItem from="1727339335057" duration="98000" />
       <workItem from="1727339485162" duration="2034000" />
-      <workItem from="1727341587752" duration="2597000" />
+      <workItem from="1727341587752" duration="2990000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
