@@ -1,6 +1,0 @@
-!/.env
-!/.venv/
-!/instance/
-!/static/media/
-!/static/.webassets-cache/
-!/Flask_Final.zip
