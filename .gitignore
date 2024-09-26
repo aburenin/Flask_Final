@@ -1,5 +1,6 @@
 .env
 .venv/
+.idea/
 instance/
 static/media/
 static/.webassets-cache/

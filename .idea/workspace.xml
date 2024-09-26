@@ -5,129 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cba5acc5-f8ce-4733-8148-94dc33126770" name="Changes" comment="first">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminka_support.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_support_functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/proofing_gallery_support.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/FAQ.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/adminka.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/alert.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/carousel_main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/datenschutz.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/datepicker.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/footer.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/kontakt.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/modal.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/modal_admin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/navbar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/portfolio.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/preise.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/project.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/proofing.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/reset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/svg_param.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/upload.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/cormorantinfant.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/daibannasil.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/forum.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/nunito.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/sf-pro-display-black.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/sf-pro-display-thin.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/sf-pro-text-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/ubuntu.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/768px-Instagram_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Google_Maps_Logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/back_client.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/bars.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/check.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/chevron-left-square.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/chevron-left.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/chevron-right-square.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/chevron-right.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/comments.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/cursor.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/fingerprint.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/follow_us.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/follow_us.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/follow_us_light.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/ico.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/ico.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/image.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/insta_ico.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo_new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo_new.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo_new.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo_new_compressed.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/logo_new_light.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/pdf.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/portr.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/portr2.avif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/portr2.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/portr2_blur.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/question.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/test.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/admin_project.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/adminka.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/apis/adminka_apis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/apis/faq_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/apis/portfolio_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/apis/price_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/apis/proofing_apis.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/carousel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/extern/_hyperscript.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/extern/datepicker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/extern/htmx.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/gui/adminka_gui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/gui/gui_alert.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/gui/gui_faq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/gui/gui_prise.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/kontakt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/modal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/navbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/portfolio.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/prise.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/proofing-gallery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/support_functions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/upload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/upload_kopie.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/libs/Isotope/isotope.pkgd.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/libs/PhotoSwipe/photoswipe-lightbox.esm.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/libs/PhotoSwipe/photoswipe.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/libs/PhotoSwipe/photoswipe.esm.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/sitemap.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/support_functions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/adminka.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/client.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/datenschutz.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/FAQ.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/alert.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/head.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/logo_header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/mobile_header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/hilfsportal/navbar.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/kontakt.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modals/contact_me.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modals/impressum.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modals/inactive_new_client.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/modals/success.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/portfolio_gallery.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/preise.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/project.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests.http" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -255,6 +133,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/BureninA.ONE-BCS/PycharmProjects/Flask_Final",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -472,7 +351,7 @@
       <workItem from="1727337574092" duration="1643000" />
       <workItem from="1727339335057" duration="98000" />
       <workItem from="1727339485162" duration="2034000" />
-      <workItem from="1727341587752" duration="390000" />
+      <workItem from="1727341587752" duration="560000" />
     </task>
     <task id="LOCAL-00001" summary="first">
       <option name="closed" value="true" />
