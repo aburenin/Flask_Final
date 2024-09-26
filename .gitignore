@@ -1,0 +1,6 @@
+.env
+.venv/
+instance/
+static/media/
+static/.webassets-cache/
+__pycache__/
