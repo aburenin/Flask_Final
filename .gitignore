@@ -3,6 +3,7 @@
 .idea/
 instance/
 static/media/
+static/img/
+static/fonts/
 static/.webassets-cache/
 __pycache__/
-Final_Flask.zip
