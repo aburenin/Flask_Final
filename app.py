@@ -68,7 +68,7 @@ check_db_instance(app=app)
 
 @app.route('/')
 def index():
-    questions = db.session.query(Question).all()
+    questions = Question.query.all()
     response = make_response(render_template('index.html', questions=questions), 200)
     return response
 
@@ -85,10 +85,11 @@ def prices():
     match request.args.get('action'):
         case 'getPrices':
             prices_array = []
-            prices = db.session.query(Preise).all()
+            prices = Preise.query.all()
             for price in prices:
-                prices_array.append(
-                    {'name': price.name, 'description': price.description.split('|'), 'price': price.price})
+                prices_array.append({'name': price.name,
+                                     'description': price.description.split('|'),
+                                     'price': price.price})
             response = jsonify(prices_array)
             return response
     response = make_response(render_template('preise.html'), 200)

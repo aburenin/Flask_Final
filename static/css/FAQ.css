@@ -95,7 +95,7 @@ h1.head-faq {
     height: fit-content;
     transform: scaleY(1);
     transition: transform .3s ease, opacity .6s;
-    font-size: clamp(0.75rem, 2vw, 1.25rem);
+    font-size: clamp(0.85rem, 2vw, 1.25rem);
     letter-spacing: .02em;
     text-wrap: pretty;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 30px;
