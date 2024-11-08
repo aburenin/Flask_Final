@@ -66,54 +66,67 @@ pakets = [
 
 qa_list = [
     (
+        '1',
         "In welchem Alter ist es am besten, ein Neugeborenen-Fotoshooting durchzuführen?",
         "Das ideale Alter für ein Neugeborenen-Fotoshooting liegt zwischen 5 und 14 Tagen nach der Geburt. In diesem Alter schlafen Babys noch viel und tief, sodass sie leichter in verschiedene Posen gebracht werden können. Außerdem haben sie in diesem Alter noch die typischen Neugeborenen-Falten und -Merkmale, die auf Fotos besonders süß aussehen."
     ),
     (
+        '2',
         "Was, wenn mein Baby während des Shootings unruhig ist oder weint?",
         "Keine Sorge, es ist ganz normal, dass Babys während eines Shootings manchmal unruhig sind oder weinen. Ich habe viel Erfahrung im Umgang mit Neugeborenen und werde alles tun, um Ihr Baby zu beruhigen und sicherzustellen, dass das Shooting so reibungslos wie möglich verläuft. Das Wichtigste ist, dass Sie sich entspannen und dem Prozess vertrauen."
     ),
     (
+        '3',
         "Was soll ich für das Shooting anziehen?",
         "Es ist am besten, neutrale und unauffällige Kleidung zu wählen, die nicht von Ihrem Baby ablenkt. Pastellfarben oder Erdtöne funktionieren gut. Vermeiden Sie Muster oder Logos, die das Bild überladen könnten. Es ist auch eine gute Idee, mehrere Outfits zur Auswahl zu haben, falls eines schmutzig wird."
     ),
     (
+        '4',
         "Kann ich Geschwister oder Haustiere in das Shooting einbeziehen?",
         "Ja, Geschwister und Haustiere können auf jeden Fall Teil des Shootings sein! Es ist eine großartige Möglichkeit, die besondere Beziehung zwischen Ihrem Neugeborenen und seinen älteren Geschwistern oder Haustieren festzuhalten. Ich werde sicherstellen, dass alle Beteiligten sicher und bequem sind und dass die Fotos authentisch und schön aussehen."
     ),
     (
+        '5',
         "Wie lange dauert das Shooting?",
         "Ein Neugeborenen-Fotoshooting kann zwischen 1 und 3 Stunden dauern, je nachdem, wie oft Ihr Baby gefüttert werden muss oder wie unruhig es ist. Es ist wichtig, sich viel Zeit zu nehmen, um sicherzustellen, dass das Baby entspannt ist und die besten Fotos gemacht werden können."
     ),
     (
+        '6',
         "Was, wenn ich das Shooting absagen oder verschieben muss?",
         "Ich verstehe, dass das Leben mit einem Neugeborenen unvorhersehbar sein kann, und bin flexibel, wenn es darum geht, Shootings zu verschieben. Wenn Sie das Shooting absagen müssen, geben Sie mir bitte so viel Vorlaufzeit wie möglich, damit ich den Termin für jemand anderen freigeben kann."
     ),
     (
+        '7',
         "Wann erhalte ich die Fotos?",
         "Die bearbeiteten Fotos werden Ihnen innerhalb von 4-5 Wochen in einer Online-Galerie zur Verfügung gestellt, von der aus Sie sie herunterladen können."
     ),
     (
+        '8',
         "Wie viele Fotos erhalte ich?",
         "Die genaue Anzahl der Fotos hängt vom gebuchten Paket und der Dauer des Shootings ab. Im Durchschnitt können Sie jedoch zwischen 15 und 30 bearbeitete Fotos erwarten."
     ),
     (
+        '9',
         "Kann ich die unbearbeiteten Fotos sehen?",
         "Ich zeige normalerweise nur die bearbeiteten Fotos, da diese das beste Endergebnis darstellen. Wenn Sie jedoch einen speziellen Wunsch haben, lassen Sie es mich wissen, und ich werde sehen, was ich tun kann."
     ),
     (
+        '10',
         "Bieten Sie auch Alben oder Drucke an?",
         "Ja, ich biete sowohl Alben als auch Drucke in verschiedenen Größen und Qualitäten an. Die Preise variieren je nach Produkt und Größe."
     ),
     (
+        '11',
         "Kann ich die Fotos in sozialen Medien teilen?",
         "Ja, Sie können die Fotos gerne in sozialen Medien teilen! Ich bitte Sie nur, mich als Fotografen zu markieren oder zu erwähnen, damit auch andere meine Arbeit sehen können."
     ),
     (
+        '12',
         "Was, wenn ich mit den Fotos nicht zufrieden bin?",
         "Es ist mir sehr wichtig, dass Sie mit den Fotos zufrieden sind. Wenn Sie Bedenken oder Wünsche haben, lassen Sie es mich wissen, und ich werde mein Bestes tun, um sicherzustellen, dass Sie glücklich sind."
     ),
     (
+        '13',
         "Kann ich Sie für andere Arten von Shootings buchen?",
         "Ja, ich biete auch andere Arten von Shootings an, wie z.B. Familien-, Schwangerschafts- oder Einzelaufnahmen. Kontaktieren Sie mich für weitere Informationen und Preise."
     )

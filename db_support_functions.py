@@ -1,9 +1,8 @@
 import os
 from datetime import datetime
-# from werkzeug.security import generate_password_hash, check_password_hash
 
 from Models import db, Preise, Question, Client, bcrypt
-from config import qa_list, pakets
+from config import qa_list
 
 from flask import jsonify, request, Flask
 
@@ -12,74 +11,8 @@ def check_db_instance(app):
     if not os.path.exists('instance/fotos-baby.db'):
         with app.app_context():
             db.create_all()
-    create_preise_table(app)
-    create_question_table(app)
-
-def create_preise_table(app):
-    # Список с данными для добавления pakets
-    with app.app_context():
-        # Проходимся по списку пакетов
-        for name, price, description in pakets:
-            # Ищем существующий пакет с таким же именем
-            existing_paket = Preise.query.filter_by(name=name).first()
-
-            if existing_paket:
-                # Флаг для отслеживания изменений
-                changes = False
-                # Сравниваем цены, если есть изменения, обновляем значение и устанавливаем флаг
-                if existing_paket.price != price:
-                    existing_paket.price = price
-                    changes = True
-                # Сравниваем описания, если есть изменения, обновляем значение и устанавливаем флаг
-                if existing_paket.description != description:
-                    existing_paket.description = description
-                    changes = True
-
-                # Если были изменения, делаем commit
-                if changes:
-                    db.session.commit()
-            else:
-                # Если пакет не найден, создаем новый и добавляем его в базу данных
-                paket = Preise(name=name, price=price, description=description)
-                try:
-                    db.session.add(paket)
-                    db.session.commit()
-                except:
-                    db.session.rollback()
-
-
-def create_question_table(app):
-    # Список с данными для добавления pakets
-
-    with app.app_context():
-        # Проходимся по списку пакетов
-        for question, answer in qa_list:
-            # Ищем существующий пакет с таким же именем
-            existing_qa = Question.query.filter_by(question=question).first()
-
-            if existing_qa:
-                # Флаг для отслеживания изменений
-                changes = False
-                # Сравниваем цены, если есть изменения, обновляем значение и устанавливаем флаг
-                if existing_qa.question != question:
-                    existing_qa.question = question
-                    changes = True
-                # Сравниваем описания, если есть изменения, обновляем значение и устанавливаем флаг
-                if existing_qa.answer != answer:
-                    existing_qa.answer = answer
-                    changes = True
-
-                # Если были изменения, делаем commit
-                if changes:
-                    db.session.commit()
-            else:
-                # Если пакет не найден, создаем новый и добавляем его в базу данных
-                paket = Question(question=question, answer=answer)
-                try:
-                    db.session.add(paket)
-                    db.session.commit()
-                except:
-                    db.session.rollback()
+    Preise.checkDB(app=app)
+    Question.checkDB(app=app)
 
 
 def add_new_project(app):

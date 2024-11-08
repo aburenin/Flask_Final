@@ -14,7 +14,7 @@ from Models import db, Client, Question, Preise, UserDirectories
 from adminka_support import get_client_data, create_paths, delete_project_path, upload_files, clear_client_gallery
 from adminka_support import get_html_for_gallery, delete_img_from_gallery, delete_project, clear_foto_list
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
-from db_support_functions import check_db_instance, add_new_project, change_project_password, create_preise_table
+from db_support_functions import check_db_instance, add_new_project, change_project_password
 from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html
 from proofing_gallery_support import check_approved_imges, add_image_to_db, remove_image_from_db, check_main_picture
 from proofing_gallery_support import download_client_gallery
@@ -225,15 +225,15 @@ def adminka():
             case 'clearFotoList':
                 response = clear_foto_list(app, id=request.form.get('id'))
                 return response
-        
+
         match request.get_json().get('action'):
             case 'delFoto':
                 projectName = request.get_json().get('projectName')
                 fileName = request.get_json().get('fileName')
                 delete_img_from_gallery(projectName, fileName)
                 return Response(status=200)
-        
-    
+
+
 
 
 @app.route('/project_delete/<int:id>/', methods=['DELETE'])
@@ -266,7 +266,7 @@ def project_delete(id):
 def client_gallery(username):
 
     match request.args.get('action'):
-    
+
         case 'checkApprovedImages':
             files = check_approved_imges(app, username)
             try:
