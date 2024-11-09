@@ -3,7 +3,7 @@ import zipfile
 
 from flask import request
 
-from Models import UserDirectories, Client, db, Project
+from Models import db, UserDirectories, Client, Project
 
 
 class ProjectProof(Project):
@@ -16,13 +16,13 @@ class ProjectProof(Project):
                 return item
 
     def approved_images(self, app):
+        """Return approved photos list from DB"""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
         return project.fotos_list.split(', ') if project.fotos_list else []
 
     def add_image_to_db(self, app):
         """Add photo's name to db as approved photo"""
-
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
 
@@ -40,8 +40,8 @@ class ProjectProof(Project):
             db.session.commit()
         return 'success'
 
-
     def remove_image_from_db(self, app):
+        """Add photo's name from db client."""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
             filename = request.get_json().get('fileName')
@@ -61,8 +61,8 @@ class ProjectProof(Project):
             db.session.commit()
         return 'success'
 
-
     def download_client_gallery(self):
+        """Make ZIP with client photos from gallery"""
         # Определяем путь к пользовательской директории
         user_dir = UserDirectories(self.username).main_path
         download_dir = os.path.join(user_dir, 'download')
