@@ -3,34 +3,27 @@ import os
 from argparse import Action
 
 from dotenv import load_dotenv, find_dotenv
-from flask import Flask, render_template, make_response, request, jsonify, abort, redirect, url_for, flash, Response, send_file
+from flask import Flask, render_template, make_response, request, jsonify, abort
+from flask import redirect, url_for, flash, Response, send_file
 from flask_assets import Environment, Bundle
-# from flask_caching import Cache
+
 from flask_cors import CORS
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
-from sqlalchemy.sql.dml import ReturningDelete
 
-from Models import db, Client, Question, Preise, UserDirectories
+from Models import db, bcrypt, Client, Question, Preise, UserDirectories
 from adminka_support import get_client_data, create_paths, delete_project_path, upload_files, clear_client_gallery
 from adminka_support import get_html_for_gallery, delete_img_from_gallery, delete_project, clear_foto_list
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
 from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html
-from proofing_gallery_support import check_approved_imges, add_image_to_db, remove_image_from_db, check_main_picture
-from proofing_gallery_support import download_client_gallery
+from proofing_gallery_support import ProjectProof
 
 from werkzeug import urls
 
-# from flask_mail import Mail, Message
-# from flask_socketio import SocketIO
-
-# eventlet.monkey_patch()
 
 app = Flask(__name__)
 app.config.from_object('config')
 
-
-# bcrypt.init_app(app)
-
+bcrypt.init_app(app)
 db.init_app(app)
 
 # Flask_Login Stuff
@@ -38,8 +31,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-assets = Environment(app)
 
+assets = Environment(app)
 # Объединение и минимизация CSS файлов
 css = Bundle('css/reset.css', 'css/main.css', 'css/footer.css', 'css/navbar.css',
              'css/modal.css', 'css/carousel_main.css', 'css/FAQ.css', output='css/styles.css', filters='cssmin')
@@ -53,6 +46,7 @@ def load_user(user_id):
 
 CORS(app=app)
 
+# from flask_caching import Cache
 #
 # cache = Cache(app, config={
 #     'CACHE_TYPE': 'simple'
@@ -62,25 +56,19 @@ CORS(app=app)
 load_dotenv(find_dotenv())
 clear_portfolio_html()
 
-# # Create new Data Base if not exist.
+# Create new Data Base if not exist and check for changed elements
 if not os.path.exists('instance/fotos-baby.db'):
-   with app.app_context():
+    with app.app_context():
         db.create_all()
 Preise.check_db(app=app)
-Question.checkDB(app=app)
+Question.check_db(app=app)
+
 
 @app.route('/')
 def index():
     questions = Question.query.all()
     response = make_response(render_template('index.html', questions=questions), 200)
     return response
-
-
-# @app.route('/faq/')
-# def faq():
-#     questions = db.session.query(Question).all()
-#     response = render_template('/modals/FAQ.html', questions=questions)
-#     return response
 
 
 @app.route('/preise/')
@@ -239,8 +227,6 @@ def adminka():
                 return Response(status=200)
 
 
-
-
 @app.route('/project_delete/<int:id>/', methods=['DELETE'])
 # @login_required
 def project_delete(id):
@@ -269,37 +255,37 @@ def project_delete(id):
 @app.route('/client-gallery/<username>', methods=['GET', 'POST', 'DELETE'])
 # @login_required
 def client_gallery(username):
+    """Function to work with client gallery: check approved photos, add photo to DB,
+    remove photo from DB, download all photos from gallery"""
+    project = ProjectProof(username)
 
     match request.args.get('action'):
 
         case 'checkApprovedImages':
-            files = check_approved_imges(app, username)
+            files = project.approved_images(app)
             try:
                 return jsonify(files)
             except Exception as e:
                 return jsonify({'error': str(e)})
 
         case 'addToDB':
-            response = add_image_to_db(app, username)
+            response = project.add_image_to_db(app)
             return jsonify(response)
 
         case 'delFromDB':
-            response = remove_image_from_db(app, username)
+            response = project.remove_image_from_db(app)
             return jsonify(response)
 
         case 'download':
-            zipFile = download_client_gallery(username)
-            print(zipFile)
+            zipFile = project.download_client_gallery()
             return send_file(zipFile, as_attachment=True)
-#
-#     case 'loadPictures':
-#         response = get_html_for_gallery(username)
-#         return response
 
-    # project = request.args.get('project')
     response = get_html_for_gallery(username)
-    picture = check_main_picture(username)
+
+    picture = project.main_pic()
+
     return make_response(render_template('client.html', projectName=username, gallery=response, picture=picture), 200)
+
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000, debug=True)

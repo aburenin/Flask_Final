@@ -12,6 +12,10 @@ from flask import request
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 
+class Project():
+    def __init__(self, username):
+        self.username = username
+
 
 class Client(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +28,6 @@ class Client(db.Model, UserMixin):
         self.name = name
         self.password = password
         self.date = date
-
 
     def __repr__(self):
         return f'{self.name}'
@@ -49,13 +52,13 @@ class Client(db.Model, UserMixin):
 
             try:
                 # Если проекта не существует, продолжаем добавление
-                #Password
-                project_password = request.form.get('projectPassword') #Get password from request form
+                # Password
+                project_password = request.form.get('projectPassword')  # Get password from request form
                 project_password_hash = bcrypt.generate_password_hash(project_password).decode('utf-8')
-                #Date
-                project_date = request.form.get('projectDate').replace('.', '-') #Get date from request form
+                # Date
+                project_date = request.form.get('projectDate').replace('.', '-')  # Get date from request form
                 date_object = datetime.datetime.strptime(project_date, '%d-%m-%Y')
-                #New Project
+                # New Project
                 new_project = Client(name=project_name, password=project_password_hash, date=date_object)
 
                 db.session.add(new_project)
@@ -130,7 +133,6 @@ class Preise(db.Model):
                 print(f"Ошибка при добавлении нового пакета: {e}")
 
 
-
 class Question(db.Model):
     __tablename__ = 'question'
 
@@ -144,7 +146,7 @@ class Question(db.Model):
         self.answer = answer
 
     @classmethod
-    def checkDB(cls, app):
+    def check_db(cls, app):
         with app.app_context():
             for id, question, answer in qa_list:
                 exist_qa = Question.query.filter_by(id=id).first()
@@ -195,6 +197,3 @@ class PortfolioDir:
 
     def get_paths(self):
         return [self.portfolio_main, self.portfolio_small, self.portfolio_blur]
-
-
-
