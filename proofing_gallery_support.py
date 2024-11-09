@@ -72,7 +72,7 @@ class ProjectProof(Project):
         # Путь к файлу zip в пользовательской директории
         zip_file_path = os.path.join(user_dir, 'download', 'download.zip')
 
-        if (os.path.exists(zip_file_path) and os.path.getsize(zip_file_path) > 0):
+        if os.path.exists(zip_file_path) and os.path.getsize(zip_file_path) > 0:
             return zip_file_path
 
         # Создаем zip-файл в пользовательской директории
