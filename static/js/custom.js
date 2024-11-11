@@ -13,8 +13,7 @@ const lazyImageObserver = new IntersectionObserver(function (entries, observer) 
     })
 }, {
     threshold: 0.2
-});
-
+})
 
 
 // Инициализация IntersectionObserver
@@ -26,8 +25,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     })
 
 })
-
-//
-// document.addEventListener('click', e=> {
-//     console.log(e.target)
-// })

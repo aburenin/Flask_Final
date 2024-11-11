@@ -3,12 +3,17 @@ import zipfile
 
 from flask import request
 
-from Models import db, UserDirectories, Client, Project
+from Models import db
+from Path import UserDirectories
+from Client import Client
 
 
-class ProjectProof(Project):
+class ProjectProof():
     __name__ = 'ProjectProof'
-    __annotations__ = '''Наследование от Project (где инициализация по Username)'''
+    """Наследование от Project (где инициализация по Username)"""
+
+    def __init__(self, username):
+        self.username = username
 
     def main_pic(self):
         for item in os.listdir(UserDirectories(self.username).main_path):

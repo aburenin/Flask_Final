@@ -1,6 +1,6 @@
 import datetime
 import os
-from argparse import Action
+from werkzeug import urls
 
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, make_response, request, jsonify, abort
@@ -10,14 +10,19 @@ from flask_assets import Environment, Bundle
 from flask_cors import CORS
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 
-from Models import db, bcrypt, Client, Question, Preise, UserDirectories
-from adminka_support import get_client_data, create_paths, delete_project_path, upload_files, clear_client_gallery
-from adminka_support import get_html_for_gallery, delete_img_from_gallery, delete_project, clear_foto_list
-from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
-from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html
-from proofing_gallery_support import ProjectProof
+from Models import db, bcrypt
+from Path import UserDirectories
+from Question import Question
+from Preise import Preise
+from Client import Client
+from Proof import ProjectProof
 
-from werkzeug import urls
+from adminka_support import get_client_data, upload_files
+from adminka_support import get_html_for_gallery, delete_project
+
+from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
+
+from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html
 
 
 app = Flask(__name__)
@@ -192,9 +197,8 @@ def adminka():
 
             case 'addNew':
                 projectName = request.form.get('projectName')
-                # status = add_new_project(app)
                 status = Client.add_new_project(app)
-                create_paths(projectName)
+                UserDirectories(projectName).create_paths()
                 return jsonify(status)
 
             case 'chngPassw':
@@ -208,48 +212,25 @@ def adminka():
                 return jsonify(status)
 
             case 'clearGallery':
-                status = clear_client_gallery(projectName)
+                status = UserDirectories(projectName).clear_gallery()
                 return jsonify(status)
+
     if request.method == 'DELETE':
         match request.form.get('action_type'):
             case 'delProject':
                 response = delete_project(app, id=request.form.get('id'))
                 return response
             case 'clearFotoList':
-                response = clear_foto_list(app, id=request.form.get('id'))
+                # response = clear_foto_list(app, id=request.form.get('id'))
+                response = Client.clear_foto_list(app, id=request.form.get('id'))
                 return response
 
         match request.get_json().get('action'):
             case 'delFoto':
-                projectName = request.get_json().get('projectName')
-                fileName = request.get_json().get('fileName')
-                delete_img_from_gallery(projectName, fileName)
-                return Response(status=200)
-
-
-@app.route('/project_delete/<int:id>/', methods=['DELETE'])
-# @login_required
-def project_delete(id):
-    if current_user.name == 'adminka':
-        try:
-            project = Client.query.filter_by(id=id).first()
-
-            db.session.delete(project)
-            db.session.commit()
-
-            if delete_project_path(project.name) == False:
-                response = Response(render_template('/hilfsportal/alert.html', status='warning',
-                                                    text=f"Невозможно удалить содержимое рроекта {project.name}. Обратитесь к администратору."))
-                response.headers['X-Success'] = 'warning'
-                return response
-
-            response = Response(
-                render_template('/hilfsportal/alert.html', status='success', text=f"Проект {project.name} был удален."))
-            response.headers['X-Success'] = 'success'
-        except Exception as e:
-            response = Response(render_template('/hilfsportal/alert.html', status='warning', text=f"{e}"))
-            response.headers['X-Success'] = 'warning'
-    return response
+                projectname = request.get_json().get('projectName')
+                filename = request.get_json().get('fileName')
+                #----  return никак не обрабатывается сейчас на фронте....
+                return UserDirectories(projectname).delete_img_from_gallery(fileName=filename)
 
 
 @app.route('/client-gallery/<username>', methods=['GET', 'POST', 'DELETE'])

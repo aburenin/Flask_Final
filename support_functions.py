@@ -1,30 +1,31 @@
 import os
+from datetime import datetime
 
 from PIL import Image
 from bs4 import BeautifulSoup, Tag
 from requests import request
 
-from Models import PortfolioDir
+from Path import PortfolioDir
 
 
 def get_html_for_portfolio(portfolio, alt_tags):
     portfolio_dir = PortfolioDir(portfolio)
     index = 0
-    gallery_file_path = os.path.join(portfolio_dir.portfolio_main, 'gallery.html')
+    gallery_file_path = os.path.join(portfolio_dir.main_path, 'gallery.html')
 
     if os.path.exists(gallery_file_path):
         with open(gallery_file_path, 'r', encoding='utf-8') as file:
             gallery_html = file.read()
     else:
         # Создание содержимого gallery_html
-        images = [f for f in os.listdir(portfolio_dir.portfolio_blur) if
-                  os.path.isfile(os.path.join(portfolio_dir.portfolio_blur, f))]
+        images = [f for f in os.listdir(portfolio_dir.blur_path) if
+                  os.path.isfile(os.path.join(portfolio_dir.blur_path, f))]
         gallery_html = ''
 
         for img_name in images:
             file_name, _ = os.path.splitext(img_name)
-            img_path = os.path.join(portfolio_dir.portfolio_small, img_name)
-            pswp_img_path = os.path.join(portfolio_dir.portfolio_main, img_name)
+            img_path = os.path.join(portfolio_dir.small_path, img_name)
+            pswp_img_path = os.path.join(portfolio_dir.main_path, img_name)
 
             with Image.open(img_path) as img:
                 width, height = img.size
@@ -55,7 +56,7 @@ def clear_portfolio_html():
     portfolio = ['newborn', 'babybauch', 'baby']
     for item in portfolio:
         portfolio_dir = PortfolioDir(item)
-        gallery_file_path = os.path.join(portfolio_dir.portfolio_main, 'gallery.html')
+        gallery_file_path = os.path.join(portfolio_dir.main_path, 'gallery.html')
         if os.path.exists(gallery_file_path):
             os.remove(gallery_file_path)
             print('Gelöscht')
@@ -82,7 +83,17 @@ def parser_datenschutz():
                     elements_between.append(str(elem))
 
             result = "\n".join(elements_between)
-            return (result)
+            return result
 
     else:
-        return (f"Failed to get the webpage: HTTP {response.status_code}. Please contact us per info@fotos-baby.de")
+        return f"Failed to get the webpage: HTTP {response.status_code}. Please contact us per info@fotos-baby.de"
+
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = datetime.now()
+        result = func(*args, **kwargs)
+        stop = datetime.now()
+        print(f'Function time: {stop - start}')
+        return result
+    return wrapper
