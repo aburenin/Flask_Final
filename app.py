@@ -18,11 +18,10 @@ from Client import Client
 from Proof import ProjectProof
 
 from adminka_support import get_client_data, upload_files
-from adminka_support import get_html_for_gallery, delete_project
 
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
 
-from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html
+from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html, verify_recaptcha
 
 
 app = Flask(__name__)
@@ -92,10 +91,21 @@ def prices():
     return response
 
 
-@app.route('/kontakt/')
+
+
+@app.route('/kontakt/', methods=['GET', 'POST'])
 def kontakt():
-    response = make_response(render_template('kontakt.html'), 200)
-    return response
+    if request.method == 'POST':
+        token = request.form.get('token')
+        if verify_recaptcha(token):
+            # Успешная проверка - отправляем статус "success" и код 200
+            return jsonify({"status": "success"}), 200
+        else:
+            # Неудачная проверка - отправляем статус "failure" и код 400
+            return jsonify({"status": "failure"}), 400
+    if request.method == 'GET':
+        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY')), 200)
+        return response
 
 
 @app.route('/portfolio-<category>/', endpoint='portfolio')
@@ -180,15 +190,16 @@ def datenschutz():
 @app.route('/adminka/', methods=['GET', 'POST', 'DELETE'])
 # @login_required
 def adminka():
-    projectName = request.args.get('projectName')
     if request.method == 'GET':
         if request.args.get('project'):
-            project = request.args.get('project')
-            response = get_html_for_gallery(project)
-            return make_response(render_template('project.html', projectName=project, gallery=response), 200)
+            client = request.args.get('project')
+            project = ProjectProof(client)
+            response = project.get_html_for_gallery()
+            return make_response(render_template('project.html', projectName=client, gallery=response), 200)
         response = make_response(render_template('adminka.html'), 200)
         return response
     if request.method == 'POST':
+        projectName = request.args.get('projectName')
         match request.args.get('action'):
 
             case 'getClients':
@@ -196,13 +207,11 @@ def adminka():
                 return response
 
             case 'addNew':
-                projectName = request.form.get('projectName')
                 status = Client.add_new_project(app)
-                UserDirectories(projectName).create_paths()
+                UserDirectories(request.form.get('projectName')).create_paths()
                 return jsonify(status)
 
             case 'chngPassw':
-                # status = change_project_password(app)
                 status = Client.change_project_password(app)
                 return jsonify(status)
 
@@ -216,13 +225,15 @@ def adminka():
                 return jsonify(status)
 
     if request.method == 'DELETE':
+        client = Client.get_client_by_id(app, request.form.get('id'))
+
         match request.form.get('action_type'):
+
             case 'delProject':
-                response = delete_project(app, id=request.form.get('id'))
+                response = client.delete_project(app)
                 return response
             case 'clearFotoList':
-                # response = clear_foto_list(app, id=request.form.get('id'))
-                response = Client.clear_foto_list(app, id=request.form.get('id'))
+                response = client.clear_foto_list(app)
                 return response
 
         match request.get_json().get('action'):
@@ -261,7 +272,7 @@ def client_gallery(username):
             zipFile = project.download_client_gallery()
             return send_file(zipFile, as_attachment=True)
 
-    response = get_html_for_gallery(username)
+    response = project.get_html_for_gallery()
 
     picture = project.main_pic()
 

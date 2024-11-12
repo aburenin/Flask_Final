@@ -100,3 +100,5 @@ class UserDirectories(Path):
             return f'{file_count} files, {total_size_mb} Mb'
         else:
             return 'Пусто'
+
+

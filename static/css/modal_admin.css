@@ -122,6 +122,11 @@
     flex-direction: row;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
+
+    .fa-calendar-days {
+        z-index: -1;
+    }
 }
 
 #popupNewClient .popup_new_client_footer {

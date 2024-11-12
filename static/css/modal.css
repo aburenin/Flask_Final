@@ -145,6 +145,16 @@
                 transform: translateY(-50%);
             }
         }
+
+        .projectDate {
+            input {
+                cursor: pointer !important;
+            }
+
+            .fa-calendar-days {
+                z-index: -1;
+            }
+        }
     }
 
     .modal-footer {
@@ -340,7 +350,7 @@
         top: 50%;
         transform: translate(-50%, -50%);
     }
-    
+
     .modal-content {
         max-width: 250px;
         width: 80%;

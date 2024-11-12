@@ -5,6 +5,7 @@ from flask import request, Response, render_template
 
 from Models import db, bcrypt
 
+from Path import UserDirectories
 
 class Client(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -17,6 +18,18 @@ class Client(db.Model, UserMixin):
         self.name = name
         self.password = password
         self.date = date
+
+    @staticmethod
+    def get_client_by_id(app, client_id):
+        with app.app_context():  # создаём контекст приложения
+            client = Client.query.filter_by(id=id).first()
+            return client
+
+    @staticmethod
+    def get_client_by_name(app, client_name):
+        with app.app_context():  # создаём контекст приложения
+            client = Client.query.get(client_name)  # выполняем запрос для поиска клиента
+            return client
 
     def __repr__(self):
         return f'{self.name}'
@@ -75,18 +88,38 @@ class Client(db.Model, UserMixin):
             else:
                 return {'status': 'info', 'text': 'Проекта не существует, обратитесь к администратору.'}
 
-    @classmethod
-    def clear_foto_list(cls, app, id):
+    def clear_foto_list(self, app):
         with app.app_context():
             try:
-                project = Client.query.filter_by(id=id).first()
-
-                project.fotos_list = ''
+                self.fotos_list = ''
+                db.session.add(self)  # Добавляем объект клиента в сессию
                 db.session.commit()
 
                 response = Response(
                     render_template('/hilfsportal/alert.html', status='success',
-                                    text=f"Проект {project.name} был очищен."))
+                                    text=f"Проект {self.name} был очищен."))
+                response.headers['X-Success'] = 'success'
+            except Exception as e:
+                response = Response(render_template('/hilfsportal/alert.html', status='warning', text=f"{e}"))
+                response.headers['X-Success'] = 'warning'
+            return response
+
+    def delete_project(self, app):
+        with app.app_context():
+
+            try:
+                db.session.delete(self)
+                db.session.commit()
+
+                if UserDirectories(self.name).delete_project_path() == False:
+                    response = Response(render_template('/hilfsportal/alert.html', status='warning',
+                                                        text=f"Невозможно удалить содержимое проекта {self.name}. Обратитесь к администратору."))
+                    response.headers['X-Success'] = 'warning'
+                    return response
+
+                response = Response(
+                    render_template('/hilfsportal/alert.html', status='success',
+                                    text=f"Проект {self.name} был удален."))
                 response.headers['X-Success'] = 'success'
             except Exception as e:
                 response = Response(render_template('/hilfsportal/alert.html', status='warning', text=f"{e}"))

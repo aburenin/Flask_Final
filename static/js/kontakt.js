@@ -4,7 +4,7 @@ import {writeAlert} from "./gui/gui_alert.js"
 const contactForm = document.getElementById('contactForm')
 const submitButton = document.querySelector('button[name=submitButton]')
 
-const checkBtnActive = ()=> {
+const checkBtnActive = () => {
     const textarea = contactForm.querySelector("textarea")
     const email = contactForm.querySelector("#email")
     const checkbox = contactForm.querySelector("#stimmung")
@@ -17,23 +17,54 @@ const checkBtnActive = ()=> {
     }
 }
 
-contactForm.addEventListener('change', (e)=>{
+contactForm.addEventListener('change', (e) => {
     checkBtnActive()
 })
 
-contactForm.addEventListener('submit', (e)=>{
-    e.preventDefault()
-    console.log('clicked_send_msg')
-    let formData = new FormData(contactForm)
+// contactForm.addEventListener('submit', (e)=>{
+//     e.preventDefault()
+//     let formData = new FormData(contactForm)
+//     const bodyMessage = `Vorname: ${formData.get('firstName')} <br>
+//                                         Nachname: ${formData.get('lastName')} <br>
+//                                         Phone: ${formData.get('phone')} <br>
+//                                         E-mail: ${formData.get('email')} <br>
+//                                         Fotoshooting Art: ${formData.get('inputGroupSelect01')} <br>
+//                                         Message: ${formData.get('message')}`
+//     sendEmail(bodyMessage, contactForm)
+// })
+
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    await grecaptcha.execute('6LdvfXwqAAAAAGU4DttrfMhKSNYvC2HPbTBe0ThA', {action: 'submit'}).then(function(token) {
+              document.getElementById('token').value = token;
+            })
+    // Создаем данные формы
+    let formData = new FormData(contactForm);
     const bodyMessage = `Vorname: ${formData.get('firstName')} <br>
-                                        Nachname: ${formData.get('lastName')} <br>
-                                        Phone: ${formData.get('phone')} <br>
-                                        E-mail: ${formData.get('email')} <br>
-                                        Fotoshooting Art: ${formData.get('inputGroupSelect01')} <br>
-                                        Message: ${formData.get('message')}`
-    console.log(bodyMessage)
-    sendEmail(bodyMessage, contactForm)
-})
+                         Nachname: ${formData.get('lastName')} <br>
+                         Phone: ${formData.get('phone')} <br>
+                         E-mail: ${formData.get('email')} <br>
+                         Fotoshooting Art: ${formData.get('inputGroupSelect01')} <br>
+                         Message: ${formData.get('message')}`;
+    // Отправляем запрос на сервер для проверки reCAPTCHA
+    const res = await fetch('/kontakt/', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                // Если проверка reCAPTCHA успешна, отправляем email
+                sendEmail(bodyMessage, contactForm);
+            } else {
+                alert("Verification failed. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        });
+});
 
 
 function sendEmail(bodyMessage, form) {
@@ -53,8 +84,7 @@ function sendEmail(bodyMessage, form) {
         if (response === 'OK') {
             form.reset()
             writeAlert('success', "Ihre Anfrage wurde versandt. Wir werden uns so schnell wie möglich mit Ihnen in Verbindung setzen.")
-        }
-        else {
+        } else {
             writeAlert('error', response)
         }
     })

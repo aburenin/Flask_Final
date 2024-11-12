@@ -3,6 +3,8 @@ import zipfile
 
 from flask import request
 
+from PIL import Image, ImageFilter, ExifTags
+
 from Models import db
 from Path import UserDirectories
 from Client import Client
@@ -89,3 +91,67 @@ class ProjectProof():
 
         # Возвращаем путь к zip-файлу
         return zip_file_path
+
+
+    def get_html_for_gallery(self):
+        user = UserDirectories(self.username)
+        index = 0
+
+        images = [f for f in os.listdir(user.main_path) if os.path.isfile(os.path.join(user.main_path, f))]
+        images.sort()
+        gallery_html = ''
+
+        for img_name in images:
+            file_name, _ = os.path.splitext(img_name)
+            img_path = os.path.join(user.small_path, file_name + '.webp')
+            pswp_img_path = os.path.join(user.main_path, img_name)
+
+            with Image.open(img_path) as img:
+                img = ProjectProof.correct_image_orientation(img)
+                width, height = img.size
+                ratio = width / height
+                style = ''
+
+            with Image.open(pswp_img_path) as img:
+                img = ProjectProof.correct_image_orientation(img)
+                width_pswp, height_pswp = img.size
+
+            gallery_html += f'''
+                                <div class="grid-item item" data-filename="{file_name}" style="ratio: {ratio}; {style}">
+                                    <div class="del-img"></div>
+                                    <a href="/static/media/clients/{self.username}/{img_name}" data-pswp-width="{width_pswp}" data-pswp-height="{height_pswp}" data-pswp data-caption="Anfangsjahr">
+                                        <span>{file_name}</span>
+                                        <img src="/static/media/clients/{self.username}/blur/{file_name}.webp"
+                                            data-src="/static/media/clients/{self.username}/small/{file_name}.webp"
+                                            alt="{img_name}" width="{width}" height="{height}" loading='lazy'
+                                            _="on intersection(intersecting) having threshold 0.25 if intersecting transition opacity to 1">
+                                    </a>
+                                    <div class="proofing--footer">
+                                        <button class="btn heart--selection" _="on click toggle .selected on me"></button>
+                                    </div>
+                                </div>
+                            '''
+            index += 1
+
+        return gallery_html
+
+    @staticmethod
+    def correct_image_orientation(image):
+        try:
+            for orientation in ExifTags.TAGS.keys():
+                if ExifTags.TAGS[orientation] == 'Orientation':
+                    break
+
+            exif = image._getexif()
+            if exif is not None:
+                orientation = exif.get(orientation, None)
+
+                if orientation == 3:
+                    image = image.rotate(180, expand=True)
+                elif orientation == 6:
+                    image = image.rotate(270, expand=True)
+                elif orientation == 8:
+                    image = image.rotate(90, expand=True)
+        except Exception as e:
+            print(f"Error correcting image orientation: {e}")
+        return image

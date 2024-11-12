@@ -1,12 +1,25 @@
 import os
 from datetime import datetime
 
+import requests
+
 from PIL import Image
 from bs4 import BeautifulSoup, Tag
 from requests import request
 
 from Path import PortfolioDir
 
+def verify_recaptcha(token):
+    url = "https://www.google.com/recaptcha/api/siteverify"
+    data = {
+        'secret': os.getenv('SECRET_KEY'),
+        'response': token
+    }
+    print(data)
+    response = requests.post(url, data=data)
+    result = response.json()
+    print(result)
+    return result.get("success", False)
 
 def get_html_for_portfolio(portfolio, alt_tags):
     portfolio_dir = PortfolioDir(portfolio)

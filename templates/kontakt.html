@@ -9,6 +9,8 @@
     <link href="{{ url_for('static', filename='css/kontakt.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
 
+    {#    Recaptcha  #}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
 </head>
 
 <body>
@@ -16,7 +18,7 @@
 
     {% include 'hilfsportal/mobile_header.html' %}
 
-    <div class="logo header-logo desktop" _="on click go to url /" ></div>
+    <div class="logo header-logo desktop" _="on click go to url /"></div>
 
     {% include 'hilfsportal/navbar.html' %}
     <hr class="desktop">
@@ -25,7 +27,8 @@
     <form class="contact-form" id="contactForm" method="POST">
         <div class="name">
             <div class="first-name">
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Max" value=""
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Max"
+                       value=""
                        required>
             </div>
 
@@ -42,7 +45,8 @@
             </div>
 
             <div class="email">
-                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com"
+                       required>
             </div>
         </div>
 
@@ -56,23 +60,30 @@
         </div>
 
         <div class="message">
-            <textarea class="form-control" id="message" name="message" placeholder="Your message here"></textarea>
+                    <textarea class="form-control" id="message" name="message"
+                              placeholder="Your message here"></textarea>
         </div>
 
         <div class="form-check">
             <label>
                 <input class="real-checkbox" type="checkbox" name="checkbox" id="stimmung">
                 <span class="custom-checkbox"></span>
-                ICH STIMME ZU, DASS MEINE ANGABEN AUS DEM KONTAKTFORMULAR ZUR BEANTWORTUNG MEINER ANFRAGE ERHOBEN UND
-                VERARBEITET WERDEN. Hinweis: Die Daten werden nach abgeschlossener Bearbeitung deiner Anfrage
-                gelöscht. Du kannst deine Einwilligung jederzeit für die Zukunft per E-Mail an info @fotos-baby.de
+                ICH STIMME ZU, DASS MEINE ANGABEN AUS DEM KONTAKTFORMULAR ZUR BEANTWORTUNG MEINER ANFRAGE
+                ERHOBEN UND
+                VERARBEITET WERDEN. Hinweis: Die Daten werden nach abgeschlossener Bearbeitung deiner
+                Anfrage
+                gelöscht. Du kannst deine Einwilligung jederzeit für die Zukunft per E-Mail an info
+                @fotos-baby.de
                 widerrufen. Detaillierte Informationen zum Umgang mit Nutzerdaten findest du in meiner
                 Datenschutzerklärung.
             </label>
         </div>
         <span id="error-msg" class="error" style="display: none;">Bitte akzeptieren Sie die Bedingungen.</span>
 
-        <button class="" type="submit" name="submitButton" disabled="" aria-labelledby="submit">E-mail
+        <input type="hidden" id="token" name="token">
+
+        <button class="submit__form" type="submit" name="submitButton" disabled=""
+                aria-labelledby="submit">E-mail
             senden!
         </button>
     </form>
