@@ -21,18 +21,6 @@ contactForm.addEventListener('change', (e) => {
     checkBtnActive()
 })
 
-// contactForm.addEventListener('submit', (e)=>{
-//     e.preventDefault()
-//     let formData = new FormData(contactForm)
-//     const bodyMessage = `Vorname: ${formData.get('firstName')} <br>
-//                                         Nachname: ${formData.get('lastName')} <br>
-//                                         Phone: ${formData.get('phone')} <br>
-//                                         E-mail: ${formData.get('email')} <br>
-//                                         Fotoshooting Art: ${formData.get('inputGroupSelect01')} <br>
-//                                         Message: ${formData.get('message')}`
-//     sendEmail(bodyMessage, contactForm)
-// })
-
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
