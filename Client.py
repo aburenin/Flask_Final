@@ -20,15 +20,15 @@ class Client(db.Model, UserMixin):
         self.date = date
 
     @staticmethod
-    def get_client_by_id(app, client_id):
+    def get_client_by_id(app, client_id) -> "Client | None":
         with app.app_context():  # создаём контекст приложения
-            client = Client.query.filter_by(id=id).first()
+            client = Client.query.filter_by(id=client_id).first()
             return client
 
     @staticmethod
-    def get_client_by_name(app, client_name):
+    def get_client_by_name(app, client_name) -> "Client | None":
         with app.app_context():  # создаём контекст приложения
-            client = Client.query.get(client_name)  # выполняем запрос для поиска клиента
+            client = Client.query.filter_by(name=client_name).first()  # выполняем запрос для поиска клиента
             return client
 
     def __repr__(self):

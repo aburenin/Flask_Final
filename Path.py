@@ -4,13 +4,26 @@ import shutil
 
 class Path:
     def __init__(self, name, base_folder='media'):
-        self.name = name
-        self.main_path = os.path.join('static', base_folder, self.name)
-        self.small_path = os.path.join(self.main_path, 'small')
-        self.blur_path = os.path.join(self.main_path, 'blur')
+        self.__name = name
+        self.__main_path = os.path.join('static', base_folder, name)
+        self.__small_path = os.path.join(self.__main_path, 'small')
+        self.__blur_path = os.path.join(self.__main_path, 'blur')
 
+    @property
+    def main_path(self):
+        return self.__main_path
+
+    @property
+    def small_path(self):
+        return self.__small_path
+
+    @property
+    def blur_path(self):
+        return self.__blur_path
+
+    @property
     def get_paths(self):
-        return [self.main_path, self.small_path, self.blur_path]
+        return [self.__main_path, self.__small_path, self.__blur_path]
 
 
 class PortfolioDir(Path):
@@ -61,7 +74,7 @@ class UserDirectories(Path):
             return {'status': 'warning', 'message': 'Данной папки не существует, обратитесь к администратору.'}
 
     def delete_project_path(self) -> bool:
-        paths = self.get_paths()
+        paths = self.get_paths
         for path in paths:
             if os.path.exists(path):
                 shutil.rmtree(path)  # Удаляем директорию и все её содержимое
@@ -70,7 +83,7 @@ class UserDirectories(Path):
                 return False
 
     def create_paths(self) -> bool:
-        paths = self.get_paths()
+        paths = self.get_paths
         for path in paths:
             if not os.path.exists(path):
                 os.makedirs(path)

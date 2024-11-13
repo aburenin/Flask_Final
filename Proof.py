@@ -4,31 +4,33 @@ import zipfile
 from flask import request
 
 from PIL import Image, ImageFilter, ExifTags
+from sqlalchemy.dialects.postgresql import array
 
 from Models import db
 from Path import UserDirectories
 from Client import Client
 
+from typing import Optional
 
-class ProjectProof():
+class ProjectProof:
     __name__ = 'ProjectProof'
     """Наследование от Project (где инициализация по Username)"""
 
     def __init__(self, username):
         self.username = username
 
-    def main_pic(self):
+    def main_pic(self) -> Optional[str]:
         for item in os.listdir(UserDirectories(self.username).main_path):
             if os.path.isfile(os.path.join('static', 'media', 'clients', self.username, item)):
                 return item
 
-    def approved_images(self, app):
+    def approved_images(self, app) -> list[str]:
         """Return approved photos list from DB"""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
         return project.fotos_list.split(', ') if project.fotos_list else []
 
-    def add_image_to_db(self, app):
+    def add_image_to_db(self, app) -> str:
         """Add photo's name to db as approved photo"""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
@@ -47,7 +49,7 @@ class ProjectProof():
             db.session.commit()
         return 'success'
 
-    def remove_image_from_db(self, app):
+    def remove_image_from_db(self, app) -> str:
         """Add photo's name from db client."""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
@@ -68,7 +70,7 @@ class ProjectProof():
             db.session.commit()
         return 'success'
 
-    def download_client_gallery(self):
+    def download_client_gallery(self) -> Optional[str]:
         """Make ZIP with client photos from gallery"""
         # Определяем путь к пользовательской директории
         user_dir = UserDirectories(self.username).main_path
@@ -93,7 +95,7 @@ class ProjectProof():
         return zip_file_path
 
 
-    def get_html_for_gallery(self):
+    def get_html_for_gallery(self) -> str:
         user = UserDirectories(self.username)
         index = 0
 
@@ -136,7 +138,7 @@ class ProjectProof():
         return gallery_html
 
     @staticmethod
-    def correct_image_orientation(image):
+    def correct_image_orientation(image: Image.Image) -> Image.Image:
         try:
             for orientation in ExifTags.TAGS.keys():
                 if ExifTags.TAGS[orientation] == 'Orientation':
@@ -155,3 +157,4 @@ class ProjectProof():
         except Exception as e:
             print(f"Error correcting image orientation: {e}")
         return image
+

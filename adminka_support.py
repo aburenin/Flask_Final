@@ -25,7 +25,8 @@ def get_client_data():
 
 
 def upload_files(uploaded_file, projectName):
-    user = UserDirectories(projectName)
+    if projectName:
+        user = UserDirectories(projectName)
 
     if uploaded_file and allow_extension(filename=uploaded_file.filename):
         # Сохраняем файл в папку пользователя.

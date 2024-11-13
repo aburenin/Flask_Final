@@ -199,7 +199,6 @@ def adminka():
         response = make_response(render_template('adminka.html'), 200)
         return response
     if request.method == 'POST':
-        projectName = request.args.get('projectName')
         match request.args.get('action'):
 
             case 'getClients':
@@ -217,10 +216,12 @@ def adminka():
 
             case 'addFotoToProject':
                 uploaded_file = request.files.get('file')
+                projectName = request.args.get('projectName')
                 status = upload_files(uploaded_file=uploaded_file, projectName=projectName)
                 return jsonify(status)
 
             case 'clearGallery':
+                projectName = request.args.get('projectName')
                 status = UserDirectories(projectName).clear_gallery()
                 return jsonify(status)
 

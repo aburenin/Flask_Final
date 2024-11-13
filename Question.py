@@ -31,14 +31,14 @@ class Question(db.Model):
                     if change:
                         db.session.commit()
                 else:
-                    new_question = Question(id=id, question=question, answer=answer)
-                    Question.new_question(new_question, app)
+                    question = Question(id=id, question=question, answer=answer)
+                    question.new_question(app)
 
-    @classmethod
-    def new_question(cls, new_question, app):
+
+    def new_question(self, app):
         with app.app_context():
             try:
-                db.session.add(new_question)
+                db.session.add(self)
                 db.session.commit()
             except Exception as e:
                 db.session.rollback()
