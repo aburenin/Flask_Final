@@ -58,6 +58,7 @@ CORS(app=app)
 
 
 load_dotenv(find_dotenv())
+
 clear_portfolio_html()
 
 # Create new Data Base if not exist and check for changed elements
@@ -164,6 +165,11 @@ def impressum():
     response = render_template('/modals/impressum.html')
     return response
 
+
+@app.route('/about_me/')
+def about():
+    response = make_response(render_template('about.html'), 200)
+    return response
 
 @app.route('/contact-me/')
 def contactMe():

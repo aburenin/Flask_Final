@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head>
+    <title>Kontakt form mit Burenina Veronika</title>
+    <meta name="description"
+          content="Neugeborenen, Babybauch und Baby Fotoshooting in meinem Homestudio mit absoluter Wohlfühlatmosphäre.">
+
+    {% include 'hilfsportal/head.html' %}
+    <link href="{{ url_for('static', filename='css/kontakt.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
+
+    {#    Recaptcha  #}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 4rem;
+        }
+
+        .about__me {
+            max-width: 1500px;
+            margin: 1rem 1rem;
+            display: grid;
+            grid-template-columns: 60% 40%;
+            margin: auto;
+
+            @media (max-width: 991px) {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 20pt;
+                font-weight: 600;
+            }
+
+            h2 {
+                font-family: 'Roboto', sans-serif;
+                font-size: 16pt;
+                font-weight: 500;
+            }
+
+            p {
+                margin: 1rem 0;
+                text-wrap: auto;
+            }
+        }
+
+
+        .text__about {
+            max-width: 80%;
+            margin: 1rem auto;
+            text-wrap: balance;
+        }
+
+        .about__me__photo {
+            position: relative;
+            top: 10%;
+            border-radius: 30%;
+            max-width: 350px;
+            margin: 0 1rem;
+            justify-self: center;
+
+            @media (max-width: 991px) {
+                place-self: center;
+            }
+        }
+
+        .impressum-footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+<header>
+
+    {% include 'hilfsportal/mobile_header.html' %}
+
+    <div class="logo header-logo desktop" _="on click go to url /"></div>
+
+    {% include 'hilfsportal/navbar.html' %}
+</header>
+
+<main class="about__me">
+    <section class="text__about desktop">
+        <h1>Über mich</h1>
+        <p>Hallo, ich bin Veronika Burenina, Fotografin für Neugeborene und werdende Mütter seit 2019. Meine
+            Leidenschaft ist es, die einzigartigen Momente und Emotionen dieser besonderen Lebensphasen festzuhalten.
+
+            Jedes Jahr absolviere ich zusätzliche Weiterbildungen bei renommierten Fotografen, um meine Fähigkeiten
+            ständig zu erweitern und Ihnen die bestmögliche Qualität zu bieten.</p>
+        <h2>Meine Philosophie</h2>
+        <p>In meinen Fotos lege ich großen Wert auf Natürlichkeit und Authentizität. Es ist mir wichtig, die echte
+            Verbindung und Liebe zwischen Ihnen und Ihrem Kind einzufangen. Ich schaffe eine entspannte Atmosphäre, in
+            der Sie sich wohlfühlen und ganz Sie selbst sein können.</p>
+        <h2>Warum Neugeborenen- und Schwangerschaftsfotografie?</h2>
+        <p>Die Arbeit mit Neugeborenen und werdenden Müttern erfüllt mich mit großer Freude. Es ist ein besonderes
+            Privileg, diese intimen und wertvollen Momente festhalten zu dürfen. Jede Sitzung ist für mich eine neue
+            Inspiration und Motivation.</p>
+        <h2>Persönliches</h2>
+        <p>In meiner Freizeit verbringe ich gerne Zeit mit meiner Familie und meinem Kind. Ich liebe Wandern, Reisen und
+            Singen. Die wunderschöne Region rund um den Bodensee und der Schweiz bietet dafür die perfekte Kulisse.
+
+            Ich freue mich darauf, Sie kennenzulernen und gemeinsam unvergessliche Erinnerungen zu schaffen.</p>
+
+
+    </section>
+    <img class="about__me__photo"
+         data-srcset="{{ url_for('static', filename='img/' + 'portr2_blur.webp') }}"
+         src="{{ url_for('static', filename='img/' + 'portr2.webp') }}"
+         style="opacity: 1"
+         alt="Burenina Veronika" loading="eager">
+    <section class="text__about mobile">
+        <h1>Über mich</h1>
+        <p>Hallo, ich bin Veronika Burenina, Fotografin für Neugeborene und werdende Mütter seit 2019. Meine
+            Leidenschaft ist es, die einzigartigen Momente und Emotionen dieser besonderen Lebensphasen festzuhalten.
+
+            Jedes Jahr absolviere ich zusätzliche Weiterbildungen bei renommierten Fotografen, um meine Fähigkeiten
+            ständig zu erweitern und Ihnen die bestmögliche Qualität zu bieten.</p>
+        <h2>Meine Philosophie</h2>
+        <p>In meinen Fotos lege ich großen Wert auf Natürlichkeit und Authentizität. Es ist mir wichtig, die echte
+            Verbindung und Liebe zwischen Ihnen und Ihrem Kind einzufangen. Ich schaffe eine entspannte Atmosphäre, in
+            der Sie sich wohlfühlen und ganz Sie selbst sein können.</p>
+        <h2>Warum Neugeborenen- und Schwangerschaftsfotografie?</h2>
+        <p>Die Arbeit mit Neugeborenen und werdenden Müttern erfüllt mich mit großer Freude. Es ist ein besonderes
+            Privileg, diese intimen und wertvollen Momente festhalten zu dürfen. Jede Sitzung ist für mich eine neue
+            Inspiration und Motivation.</p>
+        <h2>Persönliches</h2>
+        <p>In meiner Freizeit verbringe ich gerne Zeit mit meiner Familie und meinem Kind. Ich liebe Wandern, Reisen und
+            Singen. Die wunderschöne Region rund um den Bodensee und der Schweiz bietet dafür die perfekte Kulisse.
+
+            Ich freue mich darauf, Sie kennenzulernen und gemeinsam unvergessliche Erinnerungen zu schaffen.</p>
+
+
+    </section>
+</main>
+
+
+<div class="impressum-footer">
+    © BURENINA VERONIKA - Baby, Babybauch und Kinder Fotografie&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="#" hx-get="/impressum/" hx-target="body" hx-swap="beforeend">IMPRESSUM</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a class="link" href="/datenschutz" style="color: black; font-weight: bold;">DATENSCHUTZERKLÄRUNG</a>
+</div>
+
+</footer>
+
+
+<!-----------------Contact INFO button------------------------------>
+
+<button class="contact-btn" aria-labelledby="Contact Me Button" aria-label="Contact me"
+        _="on click toggle .show on .wrapper">
+</button>
+
+
+<!-- Модальное окно -->
+{% include 'modals/contact_me.html' %} <!-- Включение файла с footer -->
+
+
+</body>
+</html>
+
