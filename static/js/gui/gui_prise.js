@@ -1,6 +1,4 @@
 export async function addPriceTable(section, paket) {
-    console.log(paket)
-
     const priceCard = document.createElement('div')
     priceCard.classList.add('price-card')
 
@@ -9,6 +7,16 @@ export async function addPriceTable(section, paket) {
     cardHead.innerHTML = `<h2>${paket.name}</h2>`
 
     priceCard.appendChild(cardHead)
+
+    const cardPrice = document.createElement('div')
+    cardPrice.classList.add('card__price')
+    const spanPrise = document.createElement('span')
+    spanPrise.innerText = 'eur'
+    const pPrice = document.createElement('p')
+    pPrice.innerText = paket.price
+    cardPrice.appendChild(spanPrise)
+    cardPrice.appendChild(pPrice)
+    priceCard.appendChild(cardPrice)
 
     const cardBody = document.createElement('div')
     cardBody.classList.add('card-body')
@@ -32,19 +40,12 @@ export async function addPriceTable(section, paket) {
     const bookBtn = document.createElement('button')
     bookBtn.classList.add('book-btn')
     bookBtn.innerText = 'Jetzt buchen'
+    bookBtn.addEventListener('click', () => {
+        window.location.href = '/kontakt/'
+    })
 
-    const priceDIV = document.createElement('div')
-    priceDIV.classList.add('price-img')
-    priceDIV.style.backgroundImage = `url("${window.location.origin}/static/media/preis/preis_pure.svg")`
 
-    const priceSpan = document.createElement('span')
-    priceSpan.classList.add('price--item')
-    priceSpan.innerText = paket.price
-
-    priceDIV.appendChild(priceSpan)
-    
     cardFooter.appendChild(bookBtn)
-    cardFooter.appendChild(priceDIV)
     priceCard.appendChild(cardFooter)
 
     section.appendChild(priceCard)

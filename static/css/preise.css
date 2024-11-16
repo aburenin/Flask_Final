@@ -8,7 +8,6 @@ p.intro {
 }
 
 
-
 .price-table {
     margin: 1rem 2rem;
     display: grid;
@@ -50,9 +49,20 @@ p.intro {
     .card-head h2 {
         font-family: 'Cormorant Infant', serif;
         font-weight: bold;
-        font-size: calc(1.275rem + .3vw);
+        font-size: calc(1.275rem + .2vw);
     }
 
+    .card__price {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding-bottom: 1rem;
+        background-color: #ffffff;
+        border-bottom: 1px solid #bda27f;
+
+        span { font-size: 16pt}
+        p { font-size: 30pt}
+    }
 
     ul {
         display: flex;
@@ -71,7 +81,7 @@ p.intro {
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
-        padding-bottom: .5rem;
+        padding-bottom: 1rem;
 
         button {
             position: relative;
@@ -81,6 +91,7 @@ p.intro {
             cursor: pointer;
             font-size: 16px;
             border: 2px solid #946b31;
+            color: black;
 
             &:hover,
             &:focus {

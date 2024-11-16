@@ -159,7 +159,7 @@ li a {
     span:before {
         content: var(--chevron-down);
         position: absolute;
-        top: 0;
+        top: 1px;
         right: -1.75rem;
         height: 25px;
     }

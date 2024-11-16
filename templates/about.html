@@ -20,12 +20,20 @@
             padding-bottom: 4rem;
         }
 
+        footer {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         .about__me {
             max-width: 1500px;
-            margin: 1rem 1rem;
+            margin: 1rem auto;
             display: grid;
             grid-template-columns: 60% 40%;
-            margin: auto;
 
             @media (max-width: 991px) {
                 display: flex;
@@ -47,6 +55,7 @@
             p {
                 margin: 1rem 0;
                 text-wrap: auto;
+                line-height: 30px;
             }
         }
 
@@ -70,14 +79,6 @@
             }
         }
 
-        .impressum-footer {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-        }
-
     </style>
 </head>
 
@@ -90,6 +91,8 @@
 
     {% include 'hilfsportal/navbar.html' %}
 </header>
+
+<hr class="desktop">
 
 <main class="about__me">
     <section class="text__about desktop">
@@ -116,8 +119,8 @@
 
     </section>
     <img class="about__me__photo"
-         data-srcset="{{ url_for('static', filename='img/' + 'portr2_blur.webp') }}"
-         src="{{ url_for('static', filename='img/' + 'portr2.webp') }}"
+         data-srcset="{{ url_for('static', filename='img/' + 'portr2.webp') }}"
+         src="{{ url_for('static', filename='img/' + 'portr2_blur.webp') }}"
          style="opacity: 1"
          alt="Burenina Veronika" loading="eager">
     <section class="text__about mobile">
@@ -145,14 +148,13 @@
     </section>
 </main>
 
-
-<div class="impressum-footer">
-    © BURENINA VERONIKA - Baby, Babybauch und Kinder Fotografie&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="#" hx-get="/impressum/" hx-target="body" hx-swap="beforeend">IMPRESSUM</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a class="link" href="/datenschutz" style="color: black; font-weight: bold;">DATENSCHUTZERKLÄRUNG</a>
-</div>
-
+<footer>
+    <div class="impressum-footer">
+        © BURENINA VERONIKA - Baby, Babybauch und Kinder Fotografie&nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="#" hx-get="/impressum/" hx-target="body" hx-swap="beforeend">IMPRESSUM</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a class="link" href="/datenschutz" style="color: black; font-weight: bold;">DATENSCHUTZERKLÄRUNG</a>
+    </div>
 </footer>
 
 
@@ -166,6 +168,9 @@
 <!-- Модальное окно -->
 {% include 'modals/contact_me.html' %} <!-- Включение файла с footer -->
 
+<script src="{{ url_for('static', filename='js/custom.js' ) }}"></script>
+<script src="{{ url_for('static', filename='js/extern/_hyperscript.min.js' ) }}"></script>
+<script src="{{ url_for('static', filename='js/extern/htmx.min.js' ) }}"></script>
 
 </body>
 </html>
