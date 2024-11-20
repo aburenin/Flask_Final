@@ -4,18 +4,17 @@ import zipfile
 from flask import request
 
 from PIL import Image, ImageFilter, ExifTags
-from sqlalchemy.dialects.postgresql import array
+from sqlalchemy.orm.attributes import flag_modified
 
 from Models import db
 from Path import UserDirectories
 from Client import Client
+from Support import ImageOrientation
 
 from typing import Optional
 
-class ProjectProof:
-    __name__ = 'ProjectProof'
-    """Наследование от Project (где инициализация по Username)"""
 
+class ProjectProof:
     def __init__(self, username):
         self.username = username
 
@@ -28,7 +27,7 @@ class ProjectProof:
         """Return approved photos list from DB"""
         with app.app_context():
             project = Client.query.filter_by(name=self.username).first()
-        return project.fotos_list.split(', ') if project.fotos_list else []
+        return project.fotos_list if project.fotos_list else []
 
     def add_image_to_db(self, app) -> str:
         """Add photo's name to db as approved photo"""
@@ -38,34 +37,39 @@ class ProjectProof:
             filename = request.get_json().get('fileName')
             if not project:
                 return 'error'
-            if project.fotos_list:
-                photos = project.fotos_list.split(', ')
-                if filename not in photos:
-                    project.fotos_list += f", {filename}"
-                else:
-                    return 'foto exists'
+
+            if project.fotos_list is None:
+                project.fotos_list = []
+
+            if filename not in project.fotos_list:
+                project.fotos_list.append(filename)#
+                flag_modified(project, 'fotos_list')
             else:
-                project.fotos_list = filename
+                return 'foto exists'
+
             db.session.commit()
         return 'success'
 
     def remove_image_from_db(self, app) -> str:
-        """Add photo's name from db client."""
+        """Remove photo's name from db client."""
         with app.app_context():
+            # Ищем проект по имени
             project = Client.query.filter_by(name=self.username).first()
-            filename = request.get_json().get('fileName')
 
             if not project:
                 return 'error'
-            if project.fotos_list:
-                fotos = project.fotos_list.split(', ')
-                if filename in fotos:
-                    fotos.remove(filename)
-                    project.fotos_list = ', '.join(fotos)
-                else:
-                    return 'foto not exists'
+
+            # Получаем имя файла из JSON-запроса
+            data = request.get_json()
+            if not data or 'fileName' not in data:
+                return 'error'
+            filename = data.get('fileName')
+
+            if filename in project.fotos_list:
+                project.fotos_list.remove(filename)  # Удаляем файл
+                flag_modified(project, 'fotos_list')
             else:
-                project.fotos_list = filename
+                return 'foto not exists'
 
             db.session.commit()
         return 'success'
@@ -94,7 +98,6 @@ class ProjectProof:
         # Возвращаем путь к zip-файлу
         return zip_file_path
 
-
     def get_html_for_gallery(self) -> str:
         user = UserDirectories(self.username)
         index = 0
@@ -109,13 +112,13 @@ class ProjectProof:
             pswp_img_path = os.path.join(user.main_path, img_name)
 
             with Image.open(img_path) as img:
-                img = ProjectProof.correct_image_orientation(img)
+                img = ImageOrientation.correct_image_orientation(img)
                 width, height = img.size
                 ratio = width / height
                 style = ''
 
             with Image.open(pswp_img_path) as img:
-                img = ProjectProof.correct_image_orientation(img)
+                img = ImageOrientation.correct_image_orientation(img)
                 width_pswp, height_pswp = img.size
 
             gallery_html += f'''
@@ -136,25 +139,3 @@ class ProjectProof:
             index += 1
 
         return gallery_html
-
-    @staticmethod
-    def correct_image_orientation(image: Image.Image) -> Image.Image:
-        try:
-            for orientation in ExifTags.TAGS.keys():
-                if ExifTags.TAGS[orientation] == 'Orientation':
-                    break
-
-            exif = image._getexif()
-            if exif is not None:
-                orientation = exif.get(orientation, None)
-
-                if orientation == 3:
-                    image = image.rotate(180, expand=True)
-                elif orientation == 6:
-                    image = image.rotate(270, expand=True)
-                elif orientation == 8:
-                    image = image.rotate(90, expand=True)
-        except Exception as e:
-            print(f"Error correcting image orientation: {e}")
-        return image
-

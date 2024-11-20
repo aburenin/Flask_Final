@@ -10,7 +10,34 @@
     <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
 
     {#    Recaptcha  #}
-    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>
+    {#    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>#}
+
+    <style>
+        .submitting {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #captcha {
+            display: flex;
+            gap: 1rem;
+            flex-direction: row;
+            align-items: center;
+            font-size: 16pt;
+
+            input {
+                width: 45px;
+            }
+
+            img {
+                width: fit-content;
+                height: fit-content;
+                place-self: center;
+            }
+        }
+
+    </style>
 </head>
 
 <body>
@@ -80,12 +107,19 @@
         </div>
         <span id="error-msg" class="error" style="display: none;">Bitte akzeptieren Sie die Bedingungen.</span>
 
-        <input type="hidden" id="token" name="token">
+        <section class="submitting">
+            <label for="token" id="captcha">
+                <input id="key" name="key" value="{{ random_key }}" hidden="true"></input>
+                <input id="token" name="token" type="text" placeholder="00" required>
+                <img src="{{ url_for('static', filename='img/captcha_numbers/' + random_key + '.png' ) }}" alt="">
+                Captcha. Bitte geben Sie die Zahl ein!
+            </label>
 
-        <button class="submit__form" type="submit" name="submitButton" disabled=""
-                aria-labelledby="submit">E-mail
-            senden!
-        </button>
+            <button class="submit__form" type="submit" name="submitButton" disabled=""
+                    aria-labelledby="submit">E-mail senden!
+            </button>
+        </section>
+
     </form>
     <div class="contact-info">
         <h2>KONTAKT</h2>

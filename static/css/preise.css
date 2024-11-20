@@ -41,7 +41,6 @@ p.intro {
     padding: 0 0.5rem;
 
     .card-head {
-        background-color: #f8f8f8;
         padding: 1rem;
         border-bottom: 1px solid #bda27f;
     }
@@ -57,7 +56,6 @@ p.intro {
         justify-content: center;
         gap: 10px;
         padding-bottom: 1rem;
-        background-color: #ffffff;
         border-bottom: 1px solid #bda27f;
 
         span { font-size: 16pt}

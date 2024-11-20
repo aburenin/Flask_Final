@@ -9,7 +9,7 @@ from Path import UserDirectories
 
 from Client import Client
 from Proof import ProjectProof
-
+from Support import ImageOrientation
 
 def get_client_data():
     index = int(request.args.get('lastindex'))
@@ -36,7 +36,7 @@ def upload_files(uploaded_file, projectName):
         @copy_current_request_context
         def process_image():
             img = Image.open(file_path)  # Здесь следует открывать файл по пути, а не объект uploaded_file
-            img = ProjectProof.correct_image_orientation(img)
+            img = ImageOrientation.correct_image_orientation(img)
 
             # Уменьшите изображение
             img.thumbnail((600, 900), Image.LANCZOS)

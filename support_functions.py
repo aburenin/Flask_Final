@@ -1,25 +1,8 @@
 import os
-from datetime import datetime
-
-import requests
-
 from PIL import Image
-from bs4 import BeautifulSoup, Tag
-from requests import request
-
 from Path import PortfolioDir
+from random import choice
 
-def verify_recaptcha(token):
-    url = "https://www.google.com/recaptcha/api/siteverify"
-    data = {
-        'secret': os.getenv('SECRET_KEY'),
-        'response': token
-    }
-    print(data)
-    response = requests.post(url, data=data)
-    result = response.json()
-    print(result)
-    return result.get("success", False)
 
 def get_html_for_portfolio(portfolio, alt_tags):
     portfolio_dir = PortfolioDir(portfolio)
@@ -75,38 +58,11 @@ def clear_portfolio_html():
             print('Gelöscht')
 
 
-# ======================================================================================================================
-# 👉👉👉                       ▶️▶️▶️ Datenschutz from It-Recht-Kanzlei  ◀️◀️◀️                                 👈👈👈
-# ================================================🔽🔽🔽🔽🔽🔽=========================================================
-def parser_datenschutz():
-    response = request(url='https://itrk.legal/jrV.8V.eA2.html', method='get')
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
+def key_number(key = None):
+    numbers = {'0zBI8jGMli': '10', 'BR1lkp1Jcy': '11', 'DUerZ2bMzC': '12', 'llgSzjK4Qm': '13', 'x9KtQsOAPG': '14',
+               'OQ9tlwoFuG': '15', 'koSFn0J1Ae': '16', 'VuOpfwUF4u': '17', '9PF01a1GC.': '18', 'wyG3VE5jEm': '19',
+               'gJsIFEmRqe': '20'}
+    if key:
+        return numbers[key]
 
-        h1_tag = soup.find('h1')
-        footer_tag = soup.find('footer')
-
-        if h1_tag and footer_tag:
-            elements_between = []
-
-            for elem in h1_tag.find_next_siblings():
-                if elem == footer_tag:
-                    break
-                if isinstance(elem, Tag):  # Пропустить текстовые узлы (NavigableString)
-                    elements_between.append(str(elem))
-
-            result = "\n".join(elements_between)
-            return result
-
-    else:
-        return f"Failed to get the webpage: HTTP {response.status_code}. Please contact us per info@fotos-baby.de"
-
-
-def timer(func):
-    def wrapper(*args, **kwargs):
-        start = datetime.now()
-        result = func(*args, **kwargs)
-        stop = datetime.now()
-        print(f'Function time: {stop - start}')
-        return result
-    return wrapper
+    return choice(list(numbers.keys()))

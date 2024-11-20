@@ -10,18 +10,19 @@ from flask_assets import Environment, Bundle
 from flask_cors import CORS
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
 
+from Datenschutz import Datenschutz
 from Models import db, bcrypt
 from Path import UserDirectories
 from Question import Question
 from Preise import Preise
-from Client import Client
+from Client import Client, GetClient, ProjectManager
 from Proof import ProjectProof
 
 from adminka_support import get_client_data, upload_files
 
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
 
-from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html, verify_recaptcha
+from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html, verify_recaptcha, key_number
 
 
 app = Flask(__name__)
@@ -45,7 +46,7 @@ assets.register('css_all', css)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return Client.query.get(int(user_id))
+    return GetClient.filter_by(app=app, id=user_id)
 
 
 CORS(app=app)
@@ -96,16 +97,20 @@ def prices():
 
 @app.route('/kontakt/', methods=['GET', 'POST'])
 def kontakt():
+    random_key = key_number()
     if request.method == 'POST':
         token = request.form.get('token')
-        if verify_recaptcha(token):
-            # Успешная проверка - отправляем статус "success" и код 200
+        key = request.form.get('key')
+        check = key_number(key)
+        print(type(check), type(token))
+        if check == token:
+            print('200')
             return jsonify({"status": "success"}), 200
         else:
-            # Неудачная проверка - отправляем статус "failure" и код 400
+            print('400')
             return jsonify({"status": "failure"}), 400
     if request.method == 'GET':
-        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY')), 200)
+        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY'), random_key=random_key), 200)
         return response
 
 
@@ -137,7 +142,7 @@ def login():
     password = request.form.get('password')
     next_url = request.args.get("next")
     if login and password:
-        user = Client.query.filter_by(name=login).first()
+        user = GetClient.filter_by(app=app, name=login)
 
         if user:
             login_user(user)
@@ -180,7 +185,7 @@ def contactMe():
 @app.route('/success/')
 def success():
     text = request.args.get('text')
-    client = Client.query.filter_by(id=request.args.get('clientID')).first()
+    client = GetClient.filter_by(app=app, id=request.args.get('clientID'))
     action = request.args.get('action')
     response = render_template('/modals/success.html', text=text, client=client, action=action)
     return response
@@ -188,7 +193,7 @@ def success():
 
 @app.route('/datenschutz/')
 def datenschutz():
-    text = parser_datenschutz()
+    text = Datenschutz.parser()
     response = make_response(render_template('datenschutz.html', text=text, date=datetime.date.today()), 200)
     return response
 
@@ -212,12 +217,13 @@ def adminka():
                 return response
 
             case 'addNew':
-                status = Client.add_new_project(app)
-                UserDirectories(request.form.get('projectName')).create_paths()
+                status = ProjectManager.add_new(app, request.form.get('projectName'))
                 return jsonify(status)
 
             case 'chngPassw':
-                status = Client.change_project_password(app)
+                project_name = request.form.get('projectName')
+                new_passw = request.form.get('projectPassword')
+                status = ProjectManager.change_password(app, name=project_name, psw=new_passw)
                 return jsonify(status)
 
             case 'addFotoToProject':
@@ -232,12 +238,12 @@ def adminka():
                 return jsonify(status)
 
     if request.method == 'DELETE':
-        client = Client.get_client_by_id(app, request.form.get('id'))
+        client = GetClient.filter_by(app, id=request.form.get('id'))
 
         match request.form.get('action_type'):
 
             case 'delProject':
-                response = client.delete_project(app)
+                response = ProjectManager.delete(app, client)
                 return response
             case 'clearFotoList':
                 response = client.clear_foto_list(app)
@@ -287,4 +293,4 @@ def client_gallery(username):
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=3000, debug=True)

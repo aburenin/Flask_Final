@@ -24,9 +24,9 @@ contactForm.addEventListener('change', (e) => {
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    await grecaptcha.execute('6LdvfXwqAAAAAGU4DttrfMhKSNYvC2HPbTBe0ThA', {action: 'submit'}).then(function(token) {
-              document.getElementById('token').value = token;
-            })
+    // await grecaptcha.execute('6LdvfXwqAAAAAGU4DttrfMhKSNYvC2HPbTBe0ThA', {action: 'submit'}).then(function(token) {
+    //           document.getElementById('token').value = token;
+    //         })
     // Создаем данные формы
     let formData = new FormData(contactForm);
     const bodyMessage = `Vorname: ${formData.get('firstName')} <br>
