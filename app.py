@@ -9,6 +9,7 @@ from flask_assets import Environment, Bundle
 
 from flask_cors import CORS
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
+from flask_mail import Mail, Message
 
 from Datenschutz import Datenschutz
 from Models import db, bcrypt
@@ -17,12 +18,13 @@ from Question import Question
 from Preise import Preise
 from Client import Client, GetClient, ProjectManager
 from Proof import ProjectProof
-
+from Portfolio import Portfolio
+from Support import Recaptcha
 from adminka_support import get_client_data, upload_files
 
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
 
-from support_functions import get_html_for_portfolio, parser_datenschutz, clear_portfolio_html, verify_recaptcha, key_number
+# from support_functions import key_number
 
 
 app = Flask(__name__)
@@ -30,6 +32,7 @@ app.config.from_object('config')
 
 bcrypt.init_app(app)
 db.init_app(app)
+mail = Mail(app)
 
 # Flask_Login Stuff
 login_manager = LoginManager()
@@ -60,7 +63,8 @@ CORS(app=app)
 
 load_dotenv(find_dotenv())
 
-clear_portfolio_html()
+# clear_portfolio_html()
+Portfolio.Gallery.clear()
 
 # Create new Data Base if not exist and check for changed elements
 if not os.path.exists('instance/fotos-baby.db'):
@@ -97,12 +101,11 @@ def prices():
 
 @app.route('/kontakt/', methods=['GET', 'POST'])
 def kontakt():
-    random_key = key_number()
+    random_key = Recaptcha.get()
     if request.method == 'POST':
         token = request.form.get('token')
         key = request.form.get('key')
-        check = key_number(key)
-        print(type(check), type(token))
+        check = Recaptcha.check(key)
         if check == token:
             print('200')
             return jsonify({"status": "success"}), 200
@@ -118,6 +121,7 @@ def kontakt():
 def portfolio_gallery(category):
     if category not in ['newborn', 'babybauch', 'baby']:
         abort(404)
+    alt_tags: list[str] = []
     match category:
         case 'newborn':
             alt_tags = alt_tags_newborn
@@ -125,7 +129,7 @@ def portfolio_gallery(category):
             alt_tags = alt_tags_babybauch
         case 'baby':
             alt_tags = alt_tags_baby
-    response = get_html_for_portfolio(category, alt_tags)
+    response = Portfolio.Gallery.create(category, alt_tags)
     response = make_response(
         render_template('portfolio_gallery.html', category=category, gallery=response), 200)
     return response
