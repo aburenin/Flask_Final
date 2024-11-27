@@ -45,6 +45,9 @@ css = Bundle('css/reset.css', 'css/main.css', 'css/footer.css', 'css/navbar.css'
              'css/modal.css', 'css/carousel_main.css', 'css/FAQ.css', output='css/styles.css', filters='cssmin')
 assets.register('css_all', css)
 
+with app.app_context():
+    assets._named_bundles['css_all'].urls()
+
 
 @login_manager.user_loader
 def load_user(user_id):

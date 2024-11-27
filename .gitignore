@@ -7,3 +7,4 @@ static/.webassets-cache/
 __pycache__/
 /static/fonts/
 /static/img/
+/static/css/styles.css
