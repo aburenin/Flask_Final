@@ -40,9 +40,22 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 assets = Environment(app)
+
+# Генерация путей к CSS-файлам
+css = Bundle(
+    os.path.join('css', 'reset.css'),
+    os.path.join('css', 'main.css'),
+    os.path.join('css', 'footer.css'),
+    os.path.join('css', 'navbar.css'),
+    os.path.join('css', 'modal.css'),
+    os.path.join('css', 'carousel_main.css'),
+    os.path.join('css', 'FAQ.css'),
+    output=os.path.join('css', 'styles.css'),
+    filters='cssmin'
+)
 # Объединение и минимизация CSS файлов
-css = Bundle('css/reset.css', 'css/main.css', 'css/footer.css', 'css/navbar.css',
-             'css/modal.css', 'css/carousel_main.css', 'css/FAQ.css', output='css/styles.css', filters='cssmin')
+# css = Bundle('css/reset.css', 'css/main.css', 'css/footer.css', 'css/navbar.css',
+#              'css/modal.css', 'css/carousel_main.css', 'css/FAQ.css', output='css/styles.css', filters='cssmin')
 assets.register('css_all', css)
 
 with app.app_context():
