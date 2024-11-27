@@ -25,12 +25,12 @@ SITEMAP_INCLUDE_RULES_WITHOUT_PARAMS = True
 
 
 # Mail configuration
-# MAIL_SERVER = 'mail.your-server.de'
-# MAIL_PORT = 465
-# MAIL_USERNAME = 'info@fotos-baby.de'
-# MAIL_PASSWORD = 'cashMONEY15288'
-# MAIL_USE_TLS = False
-# MAIL_USE_SSL = True
+MAIL_SERVER = 'mail.your-server.de'
+MAIL_PORT = 465
+MAIL_USERNAME = 'info@fotos-baby.de'
+MAIL_PASSWORD = 'cashMONEY15288'
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
 
 REMEMBER_COOKIE_DURATION = timedelta(days=1)
 

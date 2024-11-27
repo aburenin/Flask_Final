@@ -1,6 +1,7 @@
 from PIL import Image, ExifTags
 from flask import request, jsonify
 from random import choice
+from flask_mail import Mail, Message
 
 class ImageOrientation:
     @staticmethod
@@ -48,3 +49,23 @@ class Recaptcha:
         # key = request.form.get('key')
         # return (jsonify({"status": "success"}), 200) if cls.NUMBERS.get(key) == token else (jsonify({"status": "failure"}), 400)
 
+
+class EmailSender:
+
+    def __init__(self, app):
+        self.mail = Mail(app)
+
+    def send(self, app):
+        with app.app_context():
+            msg_body = (f'{request.form.get('firstName')}\n'
+                        f'{request.form.get('lastName')}\n'
+                        f'{request.form.get('phone')}\n'
+                        f'{request.form.get('email')}\n'
+                        f'{request.form.get('inputGroupSelect01')}\n'
+                        f'Message: {request.form.get('message')}')
+            msg = Message(subject=request.form.get('inputGroupSelect01'),
+                          sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
+                          recipients=['burenin.alexey@gmail.com'])
+            msg.body = msg_body
+
+            self.mail.send(msg)

@@ -23,16 +23,12 @@ contactForm.addEventListener('change', (e) => {
 
 
 contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    console.log("sent")
 
     let formData = new FormData(contactForm);
-    const bodyMessage = `Vorname: ${formData.get('firstName')} <br>
-                         Nachname: ${formData.get('lastName')} <br>
-                         Phone: ${formData.get('phone')} <br>
-                         E-mail: ${formData.get('email')} <br>
-                         Fotoshooting Art: ${formData.get('inputGroupSelect01')} <br>
-                         Message: ${formData.get('message')}`;
-    // Отправляем запрос на сервер для проверки reCAPTCHA
+
     const res = await fetch('/kontakt/', {
         method: 'POST',
         body: formData
@@ -40,37 +36,14 @@ contactForm.addEventListener('submit', async (e) => {
         .then(response => {
             if (response.ok) {
                 // Если проверка reCAPTCHA успешна, отправляем email
-                sendEmail(bodyMessage, contactForm);
+                contactForm.reset()
+                writeAlert('success', "Ihre Anfrage wurde versandt. Wir werden uns so schnell wie möglich mit Ihnen in Verbindung setzen.")
             } else {
-                alert("Verification failed. Please try again.");
+                alert("Verification failed. Please try again.")
             }
         })
         .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again.");
-        });
-});
-
-
-function sendEmail(bodyMessage, form) {
-
-    Email.send({
-        SecureToken: "679b76ed-f23c-42da-9d67-1812a563b6ad",
-        To: 'burenin.alexey@gmail.com',
-        From: "info@fotosbaby.de",
-        Subject: "Baby und Babybauch Fotografie | Burenina Veronika",
-        Body: bodyMessage +
-            "<hr>" +
-            "<br>".repeat(100) +
-            "<style> a {opacity: 0 !important; display: none !important; color: transparent !important} </style>" +
-            "<style> div {display: none !important; height: 0!important} </style>" +
-            "&#9759;".repeat(9) + 'Не трогать!' + "&#9759;".repeat(9)
-    }).then(response => {
-        if (response === 'OK') {
-            form.reset()
-            writeAlert('success', "Ihre Anfrage wurde versandt. Wir werden uns so schnell wie möglich mit Ihnen in Verbindung setzen.")
-        } else {
-            writeAlert('error', response)
-        }
-    })
-}
+            console.error("Error:", error)
+            alert("An error occurred. Please try again.")
+        })
+})

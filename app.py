@@ -18,8 +18,8 @@ from Question import Question
 from Preise import Preise
 from Client import Client, GetClient, ProjectManager
 from Proof import ProjectProof
-from Portfolio import Portfolio
-from Support import Recaptcha
+from portfolio import Portfolio
+from Support import Recaptcha, EmailSender
 from adminka_support import get_client_data, upload_files
 
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
@@ -32,13 +32,12 @@ app.config.from_object('config')
 
 bcrypt.init_app(app)
 db.init_app(app)
-mail = Mail(app)
+# mail = Mail(app)
 
 # Flask_Login Stuff
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-
 
 assets = Environment(app)
 # Объединение и минимизация CSS файлов
@@ -97,8 +96,6 @@ def prices():
     return response
 
 
-
-
 @app.route('/kontakt/', methods=['GET', 'POST'])
 def kontakt():
     random_key = Recaptcha.get()
@@ -107,13 +104,31 @@ def kontakt():
         key = request.form.get('key')
         check = Recaptcha.check(key)
         if check == token:
-            print('200')
-            return jsonify({"status": "success"}), 200
+            # msg_body = (f'{request.form.get('firstName')}\n'
+            #             f'{request.form.get('lastName')}\n'
+            #             f'{request.form.get('phone')}\n'
+            #             f'{request.form.get('email')}\n'
+            #             f'{request.form.get('inputGroupSelect01')}\n'
+            #             f'Message: {request.form.get('message')}')
+            # msg = Message(subject=request.form.get('inputGroupSelect01'),
+            #                 sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
+            #                 recipients=['burenin.alexey@gmail.com'])
+            # msg.body = msg_body
+            try:
+                # mail.send(msg)
+                mail = EmailSender(app)
+                mail.send(app)
+                print('200')
+                return jsonify({"status": "success"}), 200
+            except:
+                print('400')
+                return jsonify({"status": "failure"}), 400
         else:
             print('400')
             return jsonify({"status": "failure"}), 400
     if request.method == 'GET':
-        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY'), random_key=random_key), 200)
+        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY'), random_key=random_key),
+                                 200)
         return response
 
 
@@ -179,6 +194,7 @@ def impressum():
 def about():
     response = make_response(render_template('about.html'), 200)
     return response
+
 
 @app.route('/contact-me/')
 def contactMe():
@@ -257,7 +273,7 @@ def adminka():
             case 'delFoto':
                 projectname = request.get_json().get('projectName')
                 filename = request.get_json().get('fileName')
-                #----  return никак не обрабатывается сейчас на фронте....
+                # ----  return никак не обрабатывается сейчас на фронте....
                 return UserDirectories(projectname).delete_img_from_gallery(fileName=filename)
 
 
