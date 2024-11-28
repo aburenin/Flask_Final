@@ -2,6 +2,11 @@ from PIL import Image, ExifTags
 from flask import request, jsonify
 from random import choice
 from flask_mail import Mail, Message
+import os
+import requests
+
+from config import SECRET_KEY
+
 
 class ImageOrientation:
     @staticmethod
@@ -26,30 +31,6 @@ class ImageOrientation:
         return image
 
 
-
-
-
-class Recaptcha:
-    NUMBERS = {
-        '0zBI8jGMli': '10', 'BR1lkp1Jcy': '11', 'DUerZ2bMzC': '12', 'llgSzjK4Qm': '13', 'x9KtQsOAPG': '14',
-        'OQ9tlwoFuG': '15', 'koSFn0J1Ae': '16', 'VuOpfwUF4u': '17', '9PF01a1GC.': '18', 'wyG3VE5jEm': '19',
-        'gJsIFEmRqe': '20'
-    }
-
-    @classmethod
-    def get(cls):
-        """Возвращает случайный ключ из NUMBERS."""
-        return choice(list(cls.NUMBERS.keys()))
-
-    @classmethod
-    def check(cls, key):
-        """Проверяет, есть ли ключ в NUMBERS, и возвращает значение или None."""
-        return cls.NUMBERS[key]
-        # token = request.form.get('token')
-        # key = request.form.get('key')
-        # return (jsonify({"status": "success"}), 200) if cls.NUMBERS.get(key) == token else (jsonify({"status": "failure"}), 400)
-
-
 class EmailSender:
 
     def __init__(self, app):
@@ -57,12 +38,14 @@ class EmailSender:
 
     def send(self, app):
         with app.app_context():
-            msg_body = (f'{request.form.get('firstName')}\n'
+            msg_body = (f'Von: {request.form.get('firstName')} '
                         f'{request.form.get('lastName')}\n'
-                        f'{request.form.get('phone')}\n'
-                        f'{request.form.get('email')}\n'
-                        f'{request.form.get('inputGroupSelect01')}\n'
-                        f'Message: {request.form.get('message')}')
+                        f'Tel.: {request.form.get('phone')}\n'
+                        f'E-mail: {request.form.get('email')}\n'
+                        f'Betreff: {request.form.get('inputGroupSelect01')}\n\n'
+                        f'Message:\n{request.form.get('message')}'
+                        "\n\n--------------------\nDiese E-Mail wurde von einem Kontaktformular von "
+                        "Baby, Babybauch & Kinder Fotografie (https://fotos-baby.ch) gesendet.")
             msg = Message(subject=request.form.get('inputGroupSelect01'),
                           sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
                           recipients=['burenin.alexey@gmail.com'])

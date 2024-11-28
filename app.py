@@ -1,5 +1,6 @@
 import datetime
 import os
+import requests
 from werkzeug import urls
 
 from dotenv import load_dotenv, find_dotenv
@@ -19,7 +20,7 @@ from Preise import Preise
 from Client import Client, GetClient, ProjectManager
 from Proof import ProjectProof
 from portfolio import Portfolio
-from Support import Recaptcha, EmailSender
+from Support import EmailSender
 from adminka_support import get_client_data, upload_files
 
 from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
@@ -114,24 +115,22 @@ def prices():
 
 @app.route('/kontakt/', methods=['GET', 'POST'])
 def kontakt():
-    random_key = Recaptcha.get()
     if request.method == 'POST':
-        token = request.form.get('token')
-        key = request.form.get('key')
-        check = Recaptcha.check(key)
-        if check == token:
-            # msg_body = (f'{request.form.get('firstName')}\n'
-            #             f'{request.form.get('lastName')}\n'
-            #             f'{request.form.get('phone')}\n'
-            #             f'{request.form.get('email')}\n'
-            #             f'{request.form.get('inputGroupSelect01')}\n'
-            #             f'Message: {request.form.get('message')}')
-            # msg = Message(subject=request.form.get('inputGroupSelect01'),
-            #                 sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
-            #                 recipients=['burenin.alexey@gmail.com'])
-            # msg.body = msg_body
+        turnstile_token = request.form.get("cf-turnstile-response")
+        if not turnstile_token:
+            return jsonify({"success": False, "message": "CAPTCHA token missing, please reload page!"}), 400
+
+        # Проверка токена через API Cloudflare
+        payload = {"secret": os.getenv('SECRET_KEY'), "response": turnstile_token}
+        verify_response = requests.post(os.getenv('VERIFY_URL'), data=payload).json()
+
+
+        if not verify_response.get("success"):
+            return jsonify({"success": False, "message": "CAPTCHA verification failed, please reload page!"}), 403
+
+
+        if verify_response.get("success"):
             try:
-                # mail.send(msg)
                 mail = EmailSender(app)
                 mail.send(app)
                 print('200')
@@ -139,11 +138,8 @@ def kontakt():
             except:
                 print('400')
                 return jsonify({"status": "failure"}), 400
-        else:
-            print('400')
-            return jsonify({"status": "failure"}), 400
     if request.method == 'GET':
-        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY'), random_key=random_key),
+        response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY')),
                                  200)
         return response
 
@@ -233,6 +229,11 @@ def datenschutz():
     response = make_response(render_template('datenschutz.html', text=text, date=datetime.date.today()), 200)
     return response
 
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @app.route('/adminka/', methods=['GET', 'POST', 'DELETE'])
 # @login_required

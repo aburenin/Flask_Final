@@ -10,7 +10,8 @@
     <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
 
     {#    Recaptcha  #}
-    {#    <script src="https://www.google.com/recaptcha/api.js?render={{ site_key }}"></script>#}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+
 
     <style>
         .submitting {
@@ -108,18 +109,12 @@
         </div>
         <span id="error-msg" class="error" style="display: none;">Bitte akzeptieren Sie die Bedingungen.</span>
 
-        <section class="submitting">
-            <label for="token" id="captcha">
-                <input id="key" name="key" value="{{ random_key }}" hidden="true"></input>
-                <input id="token" name="token" type="text" placeholder="00" required>
-                <img src="{{ url_for('static', filename='img/captcha_numbers/' + random_key + '.png' ) }}" alt="">
-                Captcha. Bitte geben Sie die Zahl ein!
-            </label>
 
-            <button class="submit__form" type="submit" name="submitButton" disabled=""
+        <div class="cf-turnstile" data-sitekey={{site_key}}></div>
+
+        <button class="submit__form" type="submit" name="submitButton" disabled=""
                     aria-labelledby="submit">E-mail senden!
             </button>
-        </section>
 
     </form>
     <div class="contact-info">
@@ -127,7 +122,7 @@
         <ul class="">
             <li>Neugeborene, Babybauch &amp; Baby Fotografie
             </li>
-            <li><a href="https://goo.gl/maps/AoooHaHJ5Ap1TnEBA">Cappanstraße 878224, Singen
+            <li><a href="https://goo.gl/maps/AoooHaHJ5Ap1TnEBA">Cappanstraße 8, 78224, Singen
                 (Hohentwiel)</a></li>
             <li>
                 <a class="link phone" href="tel:+4915782025303">+(49)157-82025303</a>
