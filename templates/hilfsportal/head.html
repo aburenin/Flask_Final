@@ -4,11 +4,30 @@
 
 <meta name="robots" content="index, follow">
 <meta name="keywords" lang="de"
-      content="Neugeborene, Baby, Baby-Fotografie, Baby-Fotos, Kinderfotos, Kinderfotografie, Kleinkinderfotos, Kleinkindfotografie, Kleinkinderfotografie, Fotograf am Bodensee, Newborn Fotograf in Villingen, Baby Fotogarafie Schaffhausen, Fotostudio, Fotograf, Radolfzell, Bodensee, Umgebung, westlicher Bodensee">
+      content="Babyfotografie Schweiz, Baby Fotos, Kinderfotos, Kleinkinderfotografie, Newborn Fotografie, Baby Fotograf Schaffhausen, Fotostudio Zürich, Babybauchfotos Winterthur, Fotograf Thurgau, Babyfotos Konstanz, Babyfotografie Bodensee">
 <meta name="keywords" lang="en"
-      content="Newborns, Baby, Baby Photography, Baby Photos, Children Photos, Children Photography, Toddler Photos, Toddler Photography, Photographer at Lake Constance, Newborn Photographer in Villingen, Baby Photography Schaffhausen, Photo Studio, Photographer, Radolfzell, Lake Constance, Surroundings, Western Lake Constance">
+      content="Baby photography Switzerland, Baby photos, Children photography, Toddler photos, Newborn photographer Schaffhausen, Photo studio Zurich, Baby bump photos Winterthur, Photographer Thurgau, Baby photography Lake Constance">
 
 
+<meta name="description" lang="de"
+      content="Professionelle Babyfotografie in der Schweiz. Halten Sie die wertvollen Momente Ihres Babys in einzigartigen Fotos fest. Besuchen Sie unser Fotostudio am Bodensee.">
+<meta name="description" lang="en"
+      content="Professional baby photography in Switzerland. Capture precious moments with your newborn in unique photos. Visit our photo studio at Lake Constance.">
+
+<link rel="alternate" hreflang="de-ch" href="https://fotos-baby.ch/">
+
+<!-- Локализация Open Graph -->
+<meta property="og:title" content="Professionelle Babyfotografie in der Schweiz">
+<meta property="og:description" content="Halten Sie die wertvollsten Momente Ihres Babys in der Schweiz in einzigartigen Bildern fest.">
+<meta property="og:locale" content="de_CH">
+
+
+<!-- FAVICONs -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='favicons/site.webmanifest') }}">
+<link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#00aba9">
 <meta name="theme-color" content="#434343">
 
@@ -18,7 +37,7 @@
 {#<link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">#}
 {#<link href="{{ url_for('static', filename='css/modal.css') }}" rel="stylesheet">#}
 
-    {% assets "css_all" %}
-        <link href="{{ ASSET_URL }}" type="text/css" rel="stylesheet">
-{#        <link href="../static/css/styles.css.br" type="text/css" rel="stylesheet">+#}
-    {% endassets %}
+{% assets "css_all" %}
+    <link href="{{ ASSET_URL }}" type="text/css" rel="stylesheet">
+    {#        <link href="../static/css/styles.css.br" type="text/css" rel="stylesheet">+#}
+{% endassets %}
