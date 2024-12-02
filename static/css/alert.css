@@ -34,6 +34,7 @@
         height: 64px;
         width: 64px;
         left: 50%;
+        top: 5%;
         transform: translateX(-50%);
         text-align: center;
     }
