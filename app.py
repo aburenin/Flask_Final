@@ -3,6 +3,8 @@ import os
 import requests
 from werkzeug import urls
 
+from urllib.parse import urlparse
+
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, make_response, request, jsonify, abort
 from flask import redirect, url_for, flash, Response, send_file
@@ -177,12 +179,16 @@ def login():
 
         if user:
             login_user(user)
-            if next_url and urls.url_parse(next_url).netloc == '':
+
+            if next_url and urlparse(next_url).netloc == '':
                 return redirect(next_url)
+
             elif user.name == 'adminka':
                 return redirect(url_for('adminka'))
+
             else:
                 return redirect(url_for('default_route'))  # Замените на нужный маршрут
+
         else:
             flash('Неверные учетные данные', 'warning')
     response = make_response(render_template('login.html'), 200)
@@ -236,7 +242,7 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.route('/adminka/', methods=['GET', 'POST', 'DELETE'])
-# @login_required
+@login_required
 def adminka():
     if request.method == 'GET':
         if request.args.get('project'):
