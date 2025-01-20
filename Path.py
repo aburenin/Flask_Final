@@ -27,8 +27,9 @@ class Path:
 
 
 class PortfolioDir(Path):
+    __slots__ = ('_path',)
     def __init__(self, portfolio: str) -> None:
-        self._baby = super().__init__(base_folder=('media',), path=portfolio)
+        super().__init__(base_folder=('media',), path=portfolio)
 
 
 

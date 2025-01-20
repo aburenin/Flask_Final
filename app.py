@@ -21,7 +21,7 @@ from Question import Question
 from Preise import Preise
 from Client import Client, GetClient, ProjectManager
 from Proof import ProjectProof
-from portfolio import Portfolio
+from portfolio.Portfolio import Gallery
 from Support import EmailSender
 from adminka_support import get_client_data, upload_files
 
@@ -82,7 +82,7 @@ CORS(app=app)
 load_dotenv(find_dotenv())
 
 # clear_portfolio_html()
-Portfolio.Gallery.clear()
+Gallery.clear()
 
 # Create new Data Base if not exist and check for changed elements
 if not os.path.exists('instance/fotos-baby.db'):
@@ -156,7 +156,7 @@ def portfolio_gallery(category: str):
                 alt_tags = alt_tags_babybauch
             case 'baby':
                 alt_tags = alt_tags_baby
-        response = Portfolio.Gallery.create(category, alt_tags)
+        response = Gallery.create(category, alt_tags)
         response = make_response(
             render_template('portfolio_gallery.html', category=category, gallery=response), 200)
         return response
