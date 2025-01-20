@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 from Path import Path, PortfolioDir
-from
+
 
 class Gallery(Path):
     _PORTFOLIO = ['newborn', 'babybauch', 'baby']
