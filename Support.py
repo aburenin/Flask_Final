@@ -33,8 +33,14 @@ class ImageOrientation:
 
 class EmailSender:
 
+    __slots__ = ('__mail', '__msg')
+
     def __init__(self, app):
-        self.mail = Mail(app)
+        self.__mail = Mail(app)
+        self.__msg = Message(subject=request.form.get('inputGroupSelect01'),
+                          sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
+                          recipients=['burenin.alexey@gmail.com'])
+
 
     def send(self, app):
         with app.app_context():
@@ -46,9 +52,7 @@ class EmailSender:
                         f'Message:\n{request.form.get('message')}'
                         "\n\n--------------------\nDiese E-Mail wurde von einem Kontaktformular von "
                         "Baby, Babybauch & Kinder Fotografie (https://fotos-baby.ch) gesendet.")
-            msg = Message(subject=request.form.get('inputGroupSelect01'),
-                          sender=('Fotografie Baby Babybauch & Kinder', 'info@fotos-baby.de'),
-                          recipients=['burenin.alexey@gmail.com'])
-            msg.body = msg_body
 
-            self.mail.send(msg)
+            self.__msg.body = msg_body
+
+            self.__mail.send(self.__msg)

@@ -3,9 +3,9 @@ import shutil
 
 
 class Path:
-    def __init__(self, name, base_folder='media'):
-        self.__name = name
-        self.__main_path = os.path.join('static', base_folder, name)
+    def __init__(self, base_folder: tuple, path: str) -> None:
+        self.__name = path
+        self.__main_path = os.path.join('static', *base_folder, path)
         self.__small_path = os.path.join(self.__main_path, 'small')
         self.__blur_path = os.path.join(self.__main_path, 'blur')
 
@@ -27,13 +27,14 @@ class Path:
 
 
 class PortfolioDir(Path):
-    def __init__(self, portfolio: str):
-        super().__init__(portfolio)
+    def __init__(self, portfolio: str) -> None:
+        self._baby = super().__init__(base_folder=('media',), path=portfolio)
+
 
 
 class UserDirectories(Path):
     def __init__(self, username: str):
-        super().__init__(username, base_folder=os.path.join('media', 'clients'))
+        super().__init__(base_folder=('media', 'clients'), path=username)
 
     def clear_gallery(self):
         if os.path.exists(self.main_path):
@@ -113,5 +114,3 @@ class UserDirectories(Path):
             return f'{file_count} files, {total_size_mb} Mb'
         else:
             return 'Пусто'
-
-

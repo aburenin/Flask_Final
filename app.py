@@ -104,8 +104,8 @@ def prices():
     match request.args.get('action'):
         case 'getPrices':
             prices_array = []
-            prices = Preise.query.all()
-            for price in prices:
+            items = Preise.query.all()
+            for price in items:
                 prices_array.append({'name': price.name,
                                      'description': price.description.split('|'),
                                      'price': price.price})
@@ -126,10 +126,8 @@ def kontakt():
         payload = {"secret": os.getenv('SECRET_KEY'), "response": turnstile_token}
         verify_response = requests.post(os.getenv('VERIFY_URL'), data=payload).json()
 
-
         if not verify_response.get("success"):
             return jsonify({"success": False, "message": "CAPTCHA verification failed, please reload page!"}), 403
-
 
         if verify_response.get("success"):
             try:
@@ -147,21 +145,21 @@ def kontakt():
 
 
 @app.route('/portfolio-<category>/', endpoint='portfolio')
-def portfolio_gallery(category):
+def portfolio_gallery(category: str):
     if category not in ['newborn', 'babybauch', 'baby']:
-        abort(404)
-    alt_tags: list[str] = []
-    match category:
-        case 'newborn':
-            alt_tags = alt_tags_newborn
-        case 'babybauch':
-            alt_tags = alt_tags_babybauch
-        case 'baby':
-            alt_tags = alt_tags_baby
-    response = Portfolio.Gallery.create(category, alt_tags)
-    response = make_response(
-        render_template('portfolio_gallery.html', category=category, gallery=response), 200)
-    return response
+        return abort(404)
+    else:
+        match category:
+            case 'newborn':
+                alt_tags = alt_tags_newborn
+            case 'babybauch':
+                alt_tags = alt_tags_babybauch
+            case 'baby':
+                alt_tags = alt_tags_baby
+        response = Portfolio.Gallery.create(category, alt_tags)
+        response = make_response(
+            render_template('portfolio_gallery.html', category=category, gallery=response), 200)
+        return response
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -236,10 +234,10 @@ def datenschutz():
     return response
 
 
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 @app.route('/adminka/', methods=['GET', 'POST', 'DELETE'])
 @login_required
@@ -330,9 +328,8 @@ def client_gallery(username):
 
     response = project.get_html_for_gallery()
 
-    picture = project.main_pic()
-
-    return make_response(render_template('client.html', projectName=username, gallery=response, picture=picture), 200)
+    return make_response(render_template('client.html',
+                        projectName=username, gallery=response, picture=project.mainpic), 200)
 
 
 if __name__ == "__main__":

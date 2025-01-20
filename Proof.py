@@ -11,14 +11,25 @@ from Path import UserDirectories
 from Client import Client
 from Support import ImageOrientation
 
-from typing import Optional
-
-
 class ProjectProof:
-    def __init__(self, username):
-        self.username = username
+    __slots__ = ('_username', '_mainpic')
 
-    def main_pic(self) -> Optional[str]:
+    def __init__(self, username):
+        self._username = username
+        self._mainpic = self._get_main_pic()
+
+    @property
+    def username(self):
+        return self._username
+    @username.setter
+    def username(self, username):
+        self._username = username
+
+    @property
+    def mainpic(self):
+        return self._mainpic
+
+    def _get_main_pic(self) -> str:
         for item in os.listdir(UserDirectories(self.username).main_path):
             if os.path.isfile(os.path.join('static', 'media', 'clients', self.username, item)):
                 return item
@@ -42,7 +53,7 @@ class ProjectProof:
                 project.fotos_list = []
 
             if filename not in project.fotos_list:
-                project.fotos_list.append(filename)#
+                project.fotos_list.append(filename)  #
                 flag_modified(project, 'fotos_list')
             else:
                 return 'foto exists'
@@ -74,7 +85,7 @@ class ProjectProof:
             db.session.commit()
         return 'success'
 
-    def download_client_gallery(self) -> Optional[str]:
+    def download_client_gallery(self) -> str:
         """Make ZIP with client photos from gallery"""
         # Определяем путь к пользовательской директории
         user_dir = UserDirectories(self.username).main_path

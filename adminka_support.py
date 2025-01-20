@@ -1,5 +1,5 @@
-import os
-import threading
+import os, sys
+from threading import Thread
 
 from PIL import Image, ImageFilter
 from flask import copy_current_request_context
@@ -11,22 +11,21 @@ from Client import Client
 from Proof import ProjectProof
 from Support import ImageOrientation
 
-def get_client_data():
+def get_client_data(clients_data: list = None):
+    if clients_data is None: clients_data = []
     index = int(request.args.get('lastindex'))
     clients = Client.query.offset(index).limit(10).all()
-    clients_data = []
     for client in clients:
         client_dict = client.to_dict()
-        # Используем функцию для получения URL изображения
         client_dict['img_url'] = UserDirectories(client.name).get_client_image_url()
         client_dict['path_size'] = UserDirectories(client.name).count_files_and_size()
         clients_data.append(client_dict)
     return jsonify(clients_data)
 
 
-def upload_files(uploaded_file, projectName):
-    if projectName:
-        user = UserDirectories(projectName)
+def upload_files(uploaded_file, projectname: str):
+    if projectname:
+        user = UserDirectories(projectname)
 
     if uploaded_file and allow_extension(filename=uploaded_file.filename):
         # Сохраняем файл в папку пользователя.
@@ -34,7 +33,7 @@ def upload_files(uploaded_file, projectName):
         uploaded_file.save(file_path)
 
         @copy_current_request_context
-        def process_image():
+        def image_redactor():
             img = Image.open(file_path)  # Здесь следует открывать файл по пути, а не объект uploaded_file
             img = ImageOrientation.correct_image_orientation(img)
 
@@ -50,7 +49,7 @@ def upload_files(uploaded_file, projectName):
             blurred.save(os.path.join(user.blur_path, uploaded_file.filename.split('.')[0] + '.webp'), 'WebP')
 
         # Запуск обработки изображения в отдельном потоке
-        thread = threading.Thread(target=process_image)
+        thread = Thread(target=image_redactor)
         thread.start()
 
         return {'status': 'success', 'message': f'File {uploaded_file.filename} uploaded successfully'}
@@ -59,8 +58,5 @@ def upload_files(uploaded_file, projectName):
 
 
 def allow_extension(filename):
-    allowed_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
+    allowed_extensions = '.jpg', '.jpeg', '.png', '.gif', '.webp'
     return os.path.splitext(filename)[1].lower() in allowed_extensions
-
-
-
