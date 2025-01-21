@@ -139,8 +139,9 @@ qa_list = (
     )
 )
 
-alt_tags_newborn = [
-    "Neugeborenen-Fotoshooting in Singen", "Happy Baby in Singen", "Glückliches Baby in Radolfzell",
+alt_tags = {
+    'newborn':
+                 ("Neugeborenen-Fotoshooting in Singen", "Happy Baby in Singen", "Glückliches Baby in Radolfzell",
     "Family photo in Radolfzell", "Baby-Porträt in Konstanz", "Kreatives Neugeborenes in Kreuzlingen",
     "Süßes Neugeborenes in Rottweil", "Newborn photography in Schaffhausen", "Neugeborenes und Eltern in Villingen",
     "Sleeping newborn in Villingen", "Familienfoto in Stockach", "Baby and dog in Zurich",
@@ -194,11 +195,10 @@ alt_tags_newborn = [
     "Baby’s erste Reise in Konstanz",
     "Newborn’s first trip in Kreuzlingen", "Baby mit Oma und Opa in Rottweil",
     "Newborn with grandparents in Schaffhausen",
-    "Neugeborenes mit Eltern im Garten in Villingen"
-]
+    "Neugeborenes mit Eltern im Garten in Villingen"),
 
-alt_tags_babybauch = [
-    "Schwanger in Singen", "Pregnant woman in Singen", "Babybauch in Radolfzell", "Expecting mother in Radolfzell",
+    "babybauch":
+        ("Schwanger in Singen", "Pregnant woman in Singen", "Babybauch in Radolfzell", "Expecting mother in Radolfzell",
     "Schwangere Frau in Konstanz", "Baby bump in Konstanz", "Schwangerschaft in Kreuzlingen",
     "Pregnancy in Kreuzlingen",
     "Glückliche Schwangere in Rottweil", "Happy pregnant woman in Rottweil", "Babybauchshooting in Schaffhausen",
@@ -247,11 +247,10 @@ alt_tags_babybauch = [
     "Pregnant and lake in Zurich", "Babybauch und Stadt in Winterthur", "Maternity and city in Winterthur",
     "Schwangerschaft und Dorf in Überlingen", "Pregnancy and village in Überlingen",
     "Schwanger und Wald in Friedrichshafen",
-    "Pregnant and forest in Friedrichshafen"
-]
+    "Pregnant and forest in Friedrichshafen"),
 
-alt_tags_baby = [
-    "5-monatiges Baby in Singen", "5-month-old in Singen", "Kleinkind in Radolfzell", "Toddler in Radolfzell",
+    "baby":
+                 ("5-monatiges Baby in Singen", "5-month-old in Singen", "Kleinkind in Radolfzell", "Toddler in Radolfzell",
     "1-jähriges Kind in Konstanz", "1-year-old in Konstanz", "Cakesmash Fotoshooting in Kreuzlingen",
     "Cakesmash photoshoot in Kreuzlingen",
     "Baby beim Krabbeln in Rottweil", "Crawling baby in Rottweil", "Kleinkind mit Spielzeug in Schaffhausen",
@@ -314,5 +313,5 @@ alt_tags_baby = [
     "Baby mit Lätzchen in Zurich", "Baby with bib in Zurich", "Kleinkind mit Töpfchen in Winterthur",
     "Toddler with potty in Winterthur",
     "Baby mit Milchflasche in Überlingen", "Baby with milk bottle in Überlingen",
-    "Kleinkind mit Schnuffeltuch in Friedrichshafen", "Toddler with security blanket in Friedrichshafen"
-]
+    "Kleinkind mit Schnuffeltuch in Friedrichshafen", "Toddler with security blanket in Friedrichshafen")
+}

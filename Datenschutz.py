@@ -4,10 +4,18 @@ from requests import request
 
 class Datenschutz:
     """Datenschutz from It-Recht-Kanzlei """
+    __slots__ = ("_text",)
+
+    def __init__(self):
+        self._text = self.parser(url="https://itrk.legal/jrV.8V.eA2.html")
+
+    @property
+    def text(self):
+        return self._text
 
     @staticmethod
-    def parser():
-        response = request(url='https://itrk.legal/jrV.8V.eA2.html', method='get')
+    def parser(url: str = "https://itrk.legal/jrV.8V.eA2.html") -> BeautifulSoup:
+        response = request(url=url, method='get')
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, 'html.parser')
 

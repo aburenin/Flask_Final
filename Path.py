@@ -3,37 +3,41 @@ import shutil
 
 
 class Path:
+    __slots__ = ("_name", "_main_path", "_small_path", "_blur_path")
+
     def __init__(self, base_folder: tuple, path: str) -> None:
-        self.__name = path
-        self.__main_path = os.path.join('static', *base_folder, path)
-        self.__small_path = os.path.join(self.__main_path, 'small')
-        self.__blur_path = os.path.join(self.__main_path, 'blur')
+        self._name = path
+        self._main_path = os.path.join('static', *base_folder, path)
+        self._small_path = os.path.join(self._main_path, 'small')
+        self._blur_path = os.path.join(self._main_path, 'blur')
 
     @property
-    def main_path(self):
-        return self.__main_path
+    def main_path(self) -> str:
+        return self._main_path
 
     @property
-    def small_path(self):
-        return self.__small_path
+    def small_path(self) -> str:
+        return self._small_path
 
     @property
-    def blur_path(self):
-        return self.__blur_path
+    def blur_path(self) -> str:
+        return self._blur_path
 
     @property
-    def get_paths(self):
-        return [self.__main_path, self.__small_path, self.__blur_path]
+    def get_paths(self) -> tuple[str, str, str]:
+        return self._main_path, self._small_path, self._blur_path
 
 
 class PortfolioDir(Path):
     __slots__ = ('_path',)
+
     def __init__(self, portfolio: str) -> None:
         super().__init__(base_folder=('media',), path=portfolio)
 
 
-
 class UserDirectories(Path):
+    __slots__ = ()
+
     def __init__(self, username: str):
         super().__init__(base_folder=('media', 'clients'), path=username)
 

@@ -17,8 +17,9 @@ def get_client_data(clients_data: list = None):
     clients = Client.query.offset(index).limit(10).all()
     for client in clients:
         client_dict = client.to_dict()
-        client_dict['img_url'] = UserDirectories(client.name).get_client_image_url()
-        client_dict['path_size'] = UserDirectories(client.name).count_files_and_size()
+        client_dir = UserDirectories(client.name)
+        client_dict['img_url'] = client_dir.get_client_image_url()
+        client_dict['path_size'] = client_dir.count_files_and_size()
         clients_data.append(client_dict)
     return jsonify(clients_data)
 

@@ -1,49 +1,40 @@
 import datetime
 import os
-import requests
-from werkzeug import urls
-
 from urllib.parse import urlparse
 
+import requests
 from dotenv import load_dotenv, find_dotenv
 from flask import Flask, render_template, make_response, request, jsonify, abort
-from flask import redirect, url_for, flash, Response, send_file
+from flask import redirect, url_for, flash, send_file
 from flask_assets import Environment, Bundle
-
 from flask_cors import CORS
 from flask_login import LoginManager, logout_user, login_user, login_required, current_user
-from flask_mail import Mail, Message
 
+from Client import GetClient, ProjectManager
 from Datenschutz import Datenschutz
 from Models import db, bcrypt
 from Path import UserDirectories
-from Question import Question
-from Preise import Preise
-from Client import Client, GetClient, ProjectManager
+from Preise import Preise, CHECK_DB
 from Proof import ProjectProof
-from portfolio.Portfolio import Gallery
+from Question import Question
 from Support import EmailSender
 from adminka_support import get_client_data, upload_files
-
-from config import alt_tags_newborn, alt_tags_babybauch, alt_tags_baby
-
-# from support_functions import key_number
-
+from portfolio.Portfolio import Gallery
 
 app = Flask(__name__)
 app.config.from_object('config')
 
 bcrypt.init_app(app)
 db.init_app(app)
-# mail = Mail(app)
+
 
 # Flask_Login Stuff
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-assets = Environment(app)
 
+assets = Environment(app)
 # Генерация путей к CSS-файлам
 css = Bundle(
     os.path.join('css', 'reset.css'),
@@ -56,39 +47,26 @@ css = Bundle(
     output=os.path.join('css', 'styles.css'),
     filters='cssmin'
 )
-# Объединение и минимизация CSS файлов
-# css = Bundle('css/reset.css', 'css/main.css', 'css/footer.css', 'css/navbar.css',
-#              'css/modal.css', 'css/carousel_main.css', 'css/FAQ.css', output='css/styles.css', filters='cssmin')
 assets.register('css_all', css)
-
 with app.app_context():
     assets._named_bundles['css_all'].urls()
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    return GetClient.filter_by(app=app, id=user_id)
+    return GetClient(app=app).filter_by(id=user_id)
 
 
 CORS(app=app)
-
-# from flask_caching import Cache
-#
-# cache = Cache(app, config={
-#     'CACHE_TYPE': 'simple'
-# })
-
-
 load_dotenv(find_dotenv())
 
-# clear_portfolio_html()
 Gallery.clear()
 
 # Create new Data Base if not exist and check for changed elements
 if not os.path.exists('instance/fotos-baby.db'):
     with app.app_context():
         db.create_all()
-Preise.check_db(app=app)
+CHECK_DB(app=app)
 Question.check_db(app=app)
 
 
@@ -104,8 +82,7 @@ def prices():
     match request.args.get('action'):
         case 'getPrices':
             prices_array = []
-            items = Preise.query.all()
-            for price in items:
+            for price in Preise.query.all():
                 prices_array.append({'name': price.name,
                                      'description': price.description.split('|'),
                                      'price': price.price})
@@ -133,10 +110,10 @@ def kontakt():
             try:
                 mail = EmailSender(app)
                 mail.send(app)
-                print('200')
+                # print('200')
                 return jsonify({"status": "success"}), 200
             except:
-                print('400')
+                # print('400')
                 return jsonify({"status": "failure"}), 400
     if request.method == 'GET':
         response = make_response(render_template('kontakt.html', site_key=os.getenv('SITE_KEY')),
@@ -149,14 +126,7 @@ def portfolio_gallery(category: str):
     if category not in ['newborn', 'babybauch', 'baby']:
         return abort(404)
     else:
-        match category:
-            case 'newborn':
-                alt_tags = alt_tags_newborn
-            case 'babybauch':
-                alt_tags = alt_tags_babybauch
-            case 'baby':
-                alt_tags = alt_tags_baby
-        response = Gallery.create(category, alt_tags)
+        response = Gallery(category).create()
         response = make_response(
             render_template('portfolio_gallery.html', category=category, gallery=response), 200)
         return response
@@ -173,7 +143,7 @@ def login():
     password = request.form.get('password')
     next_url = request.args.get("next")
     if login and password:
-        user = GetClient.filter_by(app=app, name=login)
+        user = GetClient(app=app).filter_by(name=login)
 
         if user:
             login_user(user)
@@ -221,7 +191,7 @@ def contactMe():
 @app.route('/success/')
 def success():
     text = request.args.get('text')
-    client = GetClient.filter_by(app=app, id=request.args.get('clientID'))
+    client = GetClient(app=app).filter_by(id=request.args.get('clientID'))
     action = request.args.get('action')
     response = render_template('/modals/success.html', text=text, client=client, action=action)
     return response
@@ -229,8 +199,8 @@ def success():
 
 @app.route('/datenschutz/')
 def datenschutz():
-    text = Datenschutz.parser()
-    response = make_response(render_template('datenschutz.html', text=text, date=datetime.date.today()), 200)
+    daten = Datenschutz()
+    response = make_response(render_template('datenschutz.html', text=daten.text, date=datetime.date.today()), 200)
     return response
 
 
@@ -250,6 +220,7 @@ def adminka():
             return make_response(render_template('project.html', projectName=client, gallery=response), 200)
         response = make_response(render_template('adminka.html'), 200)
         return response
+
     if request.method == 'POST':
         match request.args.get('action'):
 
@@ -258,33 +229,33 @@ def adminka():
                 return response
 
             case 'addNew':
-                status = ProjectManager.add_new(app, request.form.get('projectName'))
+                status = ProjectManager(app=app).add_new(project_name=request.form.get('projectName'))
                 return jsonify(status)
 
             case 'chngPassw':
                 project_name = request.form.get('projectName')
                 new_passw = request.form.get('projectPassword')
-                status = ProjectManager.change_password(app, name=project_name, psw=new_passw)
+                status = ProjectManager(app=app).change_password(name=project_name, psw=new_passw)
                 return jsonify(status)
 
             case 'addFotoToProject':
                 uploaded_file = request.files.get('file')
                 projectName = request.args.get('projectName')
-                status = upload_files(uploaded_file=uploaded_file, projectName=projectName)
+                status = upload_files(uploaded_file=uploaded_file, projectname=projectName)
                 return jsonify(status)
 
             case 'clearGallery':
                 projectName = request.args.get('projectName')
-                status = UserDirectories(projectName).clear_gallery()
+                status = UserDirectories(username=projectName).clear_gallery()
                 return jsonify(status)
 
     if request.method == 'DELETE':
-        client = GetClient.filter_by(app, id=request.form.get('id'))
+        client = GetClient(app=app).filter_by(id=request.form.get('id'))
 
         match request.form.get('action_type'):
 
             case 'delProject':
-                response = ProjectManager.delete(app, client)
+                response = ProjectManager(app=app).delete(client)
                 return response
             case 'clearFotoList':
                 response = client.clear_foto_list(app)
@@ -329,7 +300,7 @@ def client_gallery(username):
     response = project.get_html_for_gallery()
 
     return make_response(render_template('client.html',
-                        projectName=username, gallery=response, picture=project.mainpic), 200)
+                                         projectName=username, gallery=response, picture=project.mainpic), 200)
 
 
 if __name__ == "__main__":

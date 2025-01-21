@@ -1,13 +1,10 @@
 import datetime
 
-from flask_login import UserMixin
 from flask import request, Response, render_template
+from flask_login import UserMixin
 
 from Models import db, bcrypt
-
 from Path import UserDirectories
-
-from typing import Optional
 
 
 class Client(db.Model, UserMixin):
@@ -49,12 +46,16 @@ class Client(db.Model, UserMixin):
 
 
 class GetClient:
-    @staticmethod
-    def filter_by(app, id: Optional[int] = None, name: Optional[str] = None) -> Optional["Client"]:
+    __slots__ = ("__app",)
+
+    def __init__(self, app):
+        self.__app = app
+
+    def filter_by(self, id: int = None, name: str = None) -> Client | None:
         if id is None and name is None:
             raise ValueError("Необходимо указать либо id, либо name для фильтрации клиента.")
 
-        with app.app_context():
+        with self.__app.app_context():
             if id is not None:
                 return Client.query.filter_by(id=id).first()
             elif name is not None:
@@ -64,11 +65,15 @@ class GetClient:
 
 
 class ProjectManager:
-    @staticmethod
-    def add_new(app, project_name):
-        with app.app_context():
+    __slots__ = ("__app",)
+
+    def __init__(self, app):
+        self.__app = app
+
+    def add_new(self, project_name: str) -> dict:
+        with self.__app.app_context():
             # Проверка, существует ли уже такой проект
-            existing_project = GetClient.filter_by(app, name=project_name)
+            existing_project = GetClient.filter_by(self.__app, name=project_name)
             if existing_project is not None:
                 return {'status': 'warning', 'text': f'{project_name} уже существует. Имя должно быть уникальным.'}
 
@@ -91,9 +96,8 @@ class ProjectManager:
             except Exception as e:
                 return {'status': 'error', 'text': f'{e}'}
 
-    @staticmethod
-    def delete(app, project):
-        with app.app_context():
+    def delete(self, project: str) -> Response:
+        with self.__app.app_context():
             try:
                 db.session.delete(project)
                 db.session.commit()
@@ -112,10 +116,9 @@ class ProjectManager:
                 response.headers['X-Success'] = 'warning'
             return response
 
-    @staticmethod
-    def change_password(app, name, psw):
-        with app.app_context():
-            existing_project = GetClient.filter_by(app, name=name)
+    def change_password(self, name: str, psw: str) -> dict:
+        with self.__app.app_context():
+            existing_project = GetClient.filter_by(self.__app, name=name)
 
             if existing_project is not None:
                 project_password_hash = bcrypt.generate_password_hash(psw).decode('utf-8')
