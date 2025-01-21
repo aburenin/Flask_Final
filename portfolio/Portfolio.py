@@ -55,14 +55,16 @@ class Gallery(PortfolioDir):
         try:
             with open(gallery_file_path, 'w+', encoding='utf-8') as file:
                 file.writelines(gallery_html)
+                print(f"{gallery_file_path} created.")
         except IOError as e:
             print(f"Ошибка при записи файла: {e}")
 
         return ''.join(gallery_html)
 
     @classmethod
-    def clear(cls):
+    def clear_temlates(cls):
         for item in cls._PORTFOLIO:
             gallery_file_path = os.path.join("static", "media", item, 'gallery.html')
             if os.path.exists(gallery_file_path):
                 os.remove(gallery_file_path)
+            cls(item).create()

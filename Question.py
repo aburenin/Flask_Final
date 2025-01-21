@@ -13,33 +13,27 @@ class Question(db.Model):
         self.question = question
         self.answer = answer
 
-    @classmethod
-    def check_db(cls, app):
-        with app.app_context():
-            for id, question, answer in qa_list:
-                exist_qa = Question.query.filter_by(id=id).first()
+def CHECK_QUESTION_DB(app):
+    with app.app_context():
+        for id, question, answer in qa_list:
+            exist_qa = Question.query.filter_by(id=id).first()
 
-                if exist_qa:
-                    change = False
-                    if exist_qa.question != question:
-                        change = True
-                        exist_qa.question = question
-                    if exist_qa.answer != answer:
-                        change = True
-                        exist_qa.answer = answer
+            if exist_qa:
+                change = False
+                if exist_qa.question != question:
+                    change = True
+                    exist_qa.question = question
+                if exist_qa.answer != answer:
+                    change = True
+                    exist_qa.answer = answer
 
-                    if change:
-                        db.session.commit()
-                else:
-                    question = Question(id=id, question=question, answer=answer)
-                    question.new_question(app)
-
-
-    def new_question(self, app):
-        with app.app_context():
-            try:
-                db.session.add(self)
-                db.session.commit()
-            except Exception as e:
-                db.session.rollback()
-                print(f"Ошибка при добавлении нового пакета: {e}")
+                if change:
+                    db.session.commit()
+            else:
+                question = Question(id=id, question=question, answer=answer)
+                try:
+                    db.session.add(question)
+                    db.session.commit()
+                except Exception as e:
+                    db.session.rollback()
+                    print(f"Ошибка при добавлении нового пакета: {e}")

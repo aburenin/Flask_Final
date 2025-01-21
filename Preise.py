@@ -16,7 +16,7 @@ class Preise(db.Model):
         self.price = price
         self.description = description
 
-def CHECK_DB(app):
+def CHECK_PREISE_DB(app):
     with app.app_context():
         for name, price, description in pakets:
             exist_paket = Preise.query.filter_by(name=name).first()
