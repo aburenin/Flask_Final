@@ -73,7 +73,7 @@ class ProjectManager:
     def add_new(self, project_name: str) -> dict:
         with self.__app.app_context():
             # Проверка, существует ли уже такой проект
-            existing_project = GetClient.filter_by(self.__app, name=project_name)
+            existing_project = GetClient(app=self.__app).filter_by(name=project_name)
             if existing_project is not None:
                 return {'status': 'warning', 'text': f'{project_name} уже существует. Имя должно быть уникальным.'}
 
@@ -118,7 +118,7 @@ class ProjectManager:
 
     def change_password(self, name: str, psw: str) -> dict:
         with self.__app.app_context():
-            existing_project = GetClient.filter_by(self.__app, name=name)
+            existing_project = GetClient(app=self.__app).filter_by(name=name)
 
             if existing_project is not None:
                 project_password_hash = bcrypt.generate_password_hash(psw).decode('utf-8')

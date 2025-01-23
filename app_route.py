@@ -253,4 +253,5 @@ def client_gallery(username):
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=3000, debug=True)
+    # app.run(host='127.0.0.1', port=3000, debug=True)
+    app.run(host='192.168.178.80', port=3000, debug=True)

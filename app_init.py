@@ -44,7 +44,8 @@ with app.app_context():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return GetClient(app=app).filter_by(id=user_id)
+    gc  = GetClient(app=app)
+    return gc.filter_by(id=user_id)
 
 
 CORS(app=app)
