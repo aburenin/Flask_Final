@@ -139,8 +139,7 @@ class ProjectProof:
                                         <span>{file_name}</span>
                                         <img src="/static/media/clients/{self.username}/blur/{file_name}.webp"
                                             data-src="/static/media/clients/{self.username}/small/{file_name}.webp"
-                                            alt="{img_name}" width="{width}" height="{height}" loading='lazy'
-                                            _="on intersection(intersecting) having threshold 0.25 if intersecting transition opacity to 1">
+                                            alt="{img_name}" width="{width}" height="{height}" loading='lazy'>
                                     </a>
                                     <div class="proofing--footer">
                                         <button class="btn heart--selection" _="on click toggle .selected on me"></button>

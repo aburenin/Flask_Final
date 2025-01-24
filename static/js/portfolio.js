@@ -61,11 +61,6 @@ lightbox.on('close', () => {
             behavior: 'smooth'
         });
     }
-
-    // if (galleryItems[index]) {
-    //     // Прокручиваем страницу до соответствующего элемента
-    //     galleryItems[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
-    // }
 });
 
 //-------------- change to HTMX

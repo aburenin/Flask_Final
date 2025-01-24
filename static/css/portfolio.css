@@ -1,6 +1,6 @@
 .grid {
-    overflow: auto; /* Изменено на auto для устранения проблем */
-    /*overflow: hidden; !* Изменено на auto для устранения проблем *!*/
+    /*overflow: auto; !* Изменено на auto для устранения проблем *!*/
+    overflow: hidden; /* Изменено на auto для устранения проблем */
     margin: 0.5rem;
 }
 
@@ -38,6 +38,7 @@
     box-sizing: border-box;
     /*background: #f0f0f0; !* Фон-заглушка *!*/
     opacity: 0;
+    opacity: 1;
     filter: drop-shadow(0px 0px 4px #363636c9);
     transition: opacity 0.4s;
     /*transition: opacity 0.4s ease-in-out;*/
