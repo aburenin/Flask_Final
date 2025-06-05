@@ -81,12 +81,12 @@ class UserDirectories(Path):
 
     def delete_project_path(self) -> bool:
         paths = self.get_paths
+        deleted = False
         for path in paths:
             if os.path.exists(path):
                 shutil.rmtree(path)  # Удаляем директорию и все её содержимое
-                return True
-            else:
-                return False
+                deleted = True
+        return deleted
 
     def create_paths(self) -> bool:
         paths = self.get_paths
