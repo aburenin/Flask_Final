@@ -1,9 +1,7 @@
 # 📸 Fotos Baby Flask Application
 
 ## Overview / Описание
-This repository contains a production-oriented Flask application for a baby and maternity photography studio. The project delivers a marketing website, a password-protected client area, and an internal admin dashboard that allows the studio team to manage photo galleries, pricing bundles, and FAQ content from a single place. Static assets are processed with Flask-Assets, while Cloudflare Turnstile protects the public contact form.
-
-Репозиторий содержит Flask-приложение для фотостудии (новорождённые, беременность и дети). Проект объединяет публичный сайт, личные кабинеты клиентов и админку для ведения галерей, ценовых пакетов и ответов на популярные вопросы. Для статических ресурсов используется Flask-Assets, а контактная форма защищена Cloudflare Turnstile.
+This repository contains a production-oriented Flask application for a baby and maternity photography studio. Static assets are processed with Flask-Assets, while Cloudflare Turnstile protects the public contact form.
 
 ## ✨ Key Features
 - **Marketing pages** (home, pricing, portfolio, about, contact, privacy) rendered from Jinja templates.
