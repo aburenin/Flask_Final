@@ -1,4 +1,4 @@
-# 📸 Fotos Baby Flask Application [https://fotos-baby.ch/]
+# 📸 [Fotos Baby Flask Application](https://fotos-baby.ch)
 
 ## Overview / Описание
 This repository contains a production-oriented Flask application for a baby and maternity photography studio. Static assets are processed with Flask-Assets, while Cloudflare Turnstile protects the public contact form.
