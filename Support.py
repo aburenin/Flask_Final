@@ -45,14 +45,15 @@ class EmailSender:
 
     def send(self, app):
         with app.app_context():
-            msg_body = (f'Von: {request.form.get('firstName')} '
-                        f'{request.form.get('lastName')}\n'
-                        f'Tel.: {request.form.get('phone')}\n'
-                        f'E-mail: {request.form.get('email')}\n'
-                        f'Betreff: {request.form.get('inputGroupSelect01')}\n\n'
-                        f'Message:\n{request.form.get('message')}'
-                        "\n\n--------------------\nDiese E-Mail wurde von einem Kontaktformular von "
-                        "Baby, Babybauch & Kinder Fotografie (https://fotos-baby.ch) gesendet.")
+            msg_body = (
+                f"Von: {request.form.get('firstName')} {request.form.get('lastName')}\n"
+                f"Tel.: {request.form.get('phone')}\n"
+                f"E-mail: {request.form.get('email')}\n"
+                f"Betreff: {request.form.get('inputGroupSelect01')}\n\n"
+                f"Message:\n{request.form.get('message')}"
+                "\n\n--------------------\nDiese E-Mail wurde von einem Kontaktformular von "
+                "Baby, Babybauch & Kinder Fotografie (https://fotos-baby.ch) gesendet."
+            )
 
             self.__msg.body = msg_body
 
